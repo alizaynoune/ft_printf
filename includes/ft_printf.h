@@ -6,7 +6,7 @@
 /*   By: alzaynou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/31 13:06:55 by alzaynou          #+#    #+#             */
-/*   Updated: 2019/11/01 12:02:47 by alzaynou         ###   ########.fr       */
+/*   Updated: 2019/11/01 14:58:59 by alzaynou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,9 @@
 #define FT_PRINTF_H
 # include "../libft/libft.h"
 # include<stdarg.h>
+/*
+** 
+*/
 #define CNTT str[cnt + 1] ==
 
 typedef struct s_flags

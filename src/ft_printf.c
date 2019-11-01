@@ -6,7 +6,7 @@
 /*   By: alzaynou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/31 13:09:51 by alzaynou          #+#    #+#             */
-/*   Updated: 2019/11/01 12:06:40 by alzaynou         ###   ########.fr       */
+/*   Updated: 2019/11/01 14:22:07 by alzaynou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,9 +58,9 @@ int     ft_read_format(const char *str)
 int		main()
 {
 //	float a = 1.8888888;    
-//	size_t s = 9;
-//	void *a = &s;
-	ft_printf("%s %s %s %s %s %s", 9, 2, 5, 6,10 , 221);
-//	printf("\n %.2f \n", a);
+	size_t s = 9;
+	void *a = &s;
+	ft_printf(" %s %s %s %s %s %s %s %s %d", 9, 2, 5, 6,10 , 221);
+	printf(" |%19p|\n",a);
 	return (0);
 }
