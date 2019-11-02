@@ -6,7 +6,7 @@
 /*   By: alzaynou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/31 13:09:51 by alzaynou          #+#    #+#             */
-/*   Updated: 2019/11/02 00:10:01 by alzaynou         ###   ########.fr       */
+/*   Updated: 2019/11/02 23:22:24 by alzaynou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,78 +19,46 @@ int     ft_printf(const char *format, ...)
 	va_list ap;
 
 	cnt = 0;
-	flags = ft_read_format(format);
+	flags = ft_flags();
 	va_start(ap, format);
-	while (cnt < flags.carg)
+	while (format[cnt])
 	{
-		if (flags.str[cnt] == 'd' || flags.str[cnt] == 'c' || flags.str[cnt] == 's')
-		ft_print_str(flags.str[cnt], (va_arg(ap, int)));
+		if (format[cnt] == '%')
+			cnt = ft_read_flag(format, cnt, ap, flags);
+		else
+			ft_putchar(format[cnt]);
+		//	ft_print_flags(flags.str[cnt], (va_arg(ap, int)));
+	//	flags.carg--;
 		cnt++;
 	}
 	va_end(ap);
 	return (0);
 }
 
-t_flags     ft_read_format(const char *str)
+t_flags ft_flags()
 {
-	int		cnt;
 	t_flags flags;
 
-	cnt = 0;
-	flags.carg = 0;
-
-	while (str[cnt])
-	{
-		if (str[cnt] == '%' && (ft_check_flags(str[cnt + 1])))
-			flags.carg++;
-		cnt++;
-	}
-	SAFE(flags.str = (char *)malloc(sizeof(char) * (flags.carg + 1)));
-	flags = ft_copy_flags(flags, str);
-
+	flags.flg0 = "csp";
+	flags.flg1 = "diouxX";
+	flags.flg2 = "f";
 	return (flags);
 }
 
-int		ft_check_flags(char c)
+void	ft_print_flags(char c, int flag)
 {
-	if (C 'd' || C 'i' || C 'o' || C 'u' || C 'x' || C 'c' || C 's' || C 'p'||
-			C 'l' || C 'L' || C 'h' || C 'f' || C '%')
-		return (1);
-	return (0);
+	if (c == 'd')
+		ft_putnbr(flag);
+	if (c == 'c')
+		ft_putchar(flag);
 }
 
-t_flags	ft_copy_flags(t_flags flags, const char *str)
-{
-	int cnt;
-	int	cnt1;
-
-	cnt = 0;
-	cnt1 = 0;
-	while (cnt1 < flags.carg)
-	{
-		if (str[cnt] == '%' && (ft_check_flags(str[cnt + 1])))
-			flags.str[cnt1++] = str[cnt + 1];
-		cnt++;
-	}
-	flags.str[cnt1] = '\0';
-	return (flags);
-}
-
-void	ft_print_str(char c, int typ)
-{
-	if (C 'd')
-		ft_putnbr(typ);
-	if (C 'c')
-		ft_putchar((char)typ);
-}
 #include <stdio.h>
 int		main()
 {
-	int a = 120;
-//	float a = 1.8888888;    
-//	size_t s = 9;
-//	void *a = &s;
-	ft_printf("%d%d%d%c%d%d%c", 9, 2, 5, 'c',a , 221, 120);
-	printf("\n%d%d%d%c%d%d%c", 9, 2, 5, 'c',a , 221, 120);
+	char *a = "zaynoune";
+//	printf("ali| %%%d  %d%d    |%c\n", 9,1, 'c');
+	ft_printf("ali|%d % %d|%c  |%s|\n", 9,1, 'c', a);
+	ft_printf("ali|%d % %d|%c  |%s|\n", 9,1, 'c', a);
 	return (0);
 }

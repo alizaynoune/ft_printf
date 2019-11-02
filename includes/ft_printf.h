@@ -6,7 +6,7 @@
 /*   By: alzaynou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/31 13:06:55 by alzaynou          #+#    #+#             */
-/*   Updated: 2019/11/01 23:57:58 by alzaynou         ###   ########.fr       */
+/*   Updated: 2019/11/02 23:02:39 by alzaynou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,16 +28,16 @@
 
 typedef struct s_flags
 {
-	int		carg;
-	char	*str;
+	char *flg0;
+	char *flg1;
+	char *flg2;
 }				t_flags;
 
 # define SAFE(expr) if (!(expr)) exit (0)
-
 int     ft_printf(const char *format, ...);
-t_flags     ft_read_format(const char *str);
-void    ft_list_arg(const char *format);
-int     ft_check_flags(char c);
-t_flags    ft_copy_flags(t_flags flags, const char *str);
-void    ft_print_str(char c, int typ);
+void    ft_print_flags(char c, int flag);
+int         ft_read_flag(const char *format, int cnt, va_list ap, t_flags flags);
+int     ft_check_flags(char c, t_flags flags);
+t_flags ft_flags();
+
 #endif
