@@ -6,7 +6,7 @@
 /*   By: alzaynou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/31 13:09:51 by alzaynou          #+#    #+#             */
-/*   Updated: 2019/11/02 23:24:11 by alzaynou         ###   ########.fr       */
+/*   Updated: 2019/11/03 00:26:37 by alzaynou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,6 @@ int     ft_printf(const char *format, ...)
 			cnt = ft_read_flag(format, cnt, ap, flags);
 		else
 			ft_putchar(format[cnt]);
-		//	ft_print_flags(flags.str[cnt], (va_arg(ap, int)));
-	//	flags.carg--;
 		cnt++;
 	}
 	va_end(ap);
@@ -47,18 +45,26 @@ t_flags ft_flags()
 
 void	ft_print_flags(char c, int flag)
 {
+	char *str;
+
 	if (c == 'd')
 		ft_putnbr(flag);
 	if (c == 'c')
 		ft_putchar(flag);
+	if (c == 'o')
+	{
+		str = ft_to_octal(flag);
+		ft_putstr(str);
+		free(str);
+	}
 }
 
 #include <stdio.h>
 int		main()
 {
 	char *a = "zaynoune";
-//	printf("ali| %%%d  %d%d    |%c\n", 9,1, 'c');
-	ft_printf("ali|%d % %d|%c  |%s|\n", 9,1, 'c', a);
-	ft_printf("ali|%d % %d|%c  |%s|\n", 9,1, 'c', a);
+	int x = 0xFFFF;
+	ft_printf("ali|%d %% %d|%c  |%s|%d|\n", 9,1, 'c', a, x);
+	printf("ali|%d %% %d|%c  |%s|%o|%d|\n", 9, 1, 'c', a, x, x);
 	return (0);
 }

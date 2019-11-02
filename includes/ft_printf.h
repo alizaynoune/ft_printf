@@ -6,7 +6,7 @@
 /*   By: alzaynou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/31 13:06:55 by alzaynou          #+#    #+#             */
-/*   Updated: 2019/11/02 23:02:39 by alzaynou         ###   ########.fr       */
+/*   Updated: 2019/11/02 23:58:36 by alzaynou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,5 +39,6 @@ void    ft_print_flags(char c, int flag);
 int         ft_read_flag(const char *format, int cnt, va_list ap, t_flags flags);
 int     ft_check_flags(char c, t_flags flags);
 t_flags ft_flags();
+char    *ft_to_octal(int num);
 
 #endif

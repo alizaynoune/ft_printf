@@ -6,7 +6,7 @@
 /*   By: alzaynou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/02 19:21:57 by alzaynou          #+#    #+#             */
-/*   Updated: 2019/11/02 23:24:08 by alzaynou         ###   ########.fr       */
+/*   Updated: 2019/11/03 00:02:19 by alzaynou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@ int			ft_read_flag(const char *format, int cnt, va_list ap, t_flags flags)
 {
 	if (ft_check_flags(format[cnt + 1], flags))
 	{
-		if (format[cnt + 1] == 'c' || format[cnt + 1] == 'd')
+		if (format[cnt + 1] == 'c' || format[cnt + 1] == 'd' ||
+				format[cnt + 1] == 'o')
 			ft_print_flags(format[cnt + 1], (va_arg(ap, int)));
 		if (format[cnt + 1] == 's')
 			ft_putstr(va_arg(ap, char*));
