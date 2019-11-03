@@ -6,32 +6,112 @@
 /*   By: alzaynou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/02 23:42:41 by alzaynou          #+#    #+#             */
-/*   Updated: 2019/11/03 00:10:39 by alzaynou         ###   ########.fr       */
+/*   Updated: 2019/11/03 16:41:26 by alzaynou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
- #include "../includes/ft_printf.h"
+#include "../includes/ft_printf.h"
 
-char	*ft_to_octal(int num)
+char	*ft_to_octal(unsigned int num)
 {
-	int		num1;
-	int		cnt;
-	char	*str;
+	unsigned int	num1;
+	int				cnt;
+	char			*str;
 
 	num1 = num;
-	cnt = 0;
-	while (num1 > 0)
+	cnt = 1;
+	while (num1 > 7)
 	{
 		num1 /= 8;
 		cnt++;
 	}
 	SAFE(str = (char *)malloc(sizeof(char) * (cnt + 1)));
 	str[cnt--] = '\0';
-	while (num > 0)
+	while (cnt >= 0)
 	{
 		str[cnt] = (num % 8) + '0';
 		num /= 8;
 		cnt--;
 	}
+	return (str);
+}
+
+char	*ft_to_hexa(unsigned int num, char c)
+{
+	unsigned int	num1;
+	int				cnt;
+	char			*str;
+
+	num1 = num;
+	cnt = 1;
+	while (num1 > 15)
+	{
+		num1 /= 16;
+		cnt++;
+	}
+	SAFE(str = (char *)malloc(sizeof(char) * (cnt + 1)));
+	str[cnt--] = '\0';
+	while (cnt >= 0)
+	{
+		if ((num % 16) >= 10 && c == 'x')
+			str[cnt--] = ((num % 16) % 10) + 'a';
+		else if ((num % 16) >= 10 && c == 'X')
+			str[cnt--] = ((num % 16) % 10) + 'A';
+		else
+			str[cnt--] = (num % 16) + '0';
+		num /= 16;
+	}
+	return (str);
+}
+
+char	*ft_unsigned(unsigned int num)
+{
+	int				cnt;
+	unsigned int	num1;
+	char			*str;
+
+	cnt = 1;
+	num1 = num;
+	while (num1 > 9)
+	{
+		num1 /= 10;
+		cnt++;
+	}
+	SAFE(str = (char *)malloc(sizeof(char) * (cnt + 1)));
+	str[cnt--] = '\0';
+	while (cnt >= 0)
+	{
+		str[cnt--] = (num % 10) + '0';
+		num /= 10;
+	}
+	return (str);
+}
+
+char	*ft_decimal(int num)
+{
+	long	num1;
+	int		cnt;
+	char	*str;
+
+	cnt = num >= 0 ? 0 : 1;
+	num1 = num;
+	num1 = num1 > 0 ? num1 : num1 * -1;
+	while (num1 != 0)
+	{
+		num1 /= 10;
+		cnt++;
+	}
+	SAFE(str = (char *)malloc(sizeof(char) * (cnt + 1)));
+	str[cnt--] = '\0';
+	num1 = num;
+	num1 = num1 > 0 ? num1 : num1 * -1;
+	while (cnt >= 0)
+	{
+		str[cnt] = (num1 % 10) + '0';
+		num1 /= 10;
+		cnt--;
+	}
+	if (num < 0)
+		str[0] = '-';
 	return (str);
 }

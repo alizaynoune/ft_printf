@@ -6,7 +6,7 @@
 /*   By: alzaynou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/31 13:06:55 by alzaynou          #+#    #+#             */
-/*   Updated: 2019/11/02 23:58:36 by alzaynou         ###   ########.fr       */
+/*   Updated: 2019/11/03 16:22:27 by alzaynou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,13 @@ typedef struct s_flags
 
 # define SAFE(expr) if (!(expr)) exit (0)
 int     ft_printf(const char *format, ...);
-void    ft_print_flags(char c, int flag);
+void    ft_print_flags(char c, unsigned int flag);
 int         ft_read_flag(const char *format, int cnt, va_list ap, t_flags flags);
 int     ft_check_flags(char c, t_flags flags);
 t_flags ft_flags();
-char    *ft_to_octal(int num);
-
+char    *ft_to_octal(unsigned int num);
+char    *ft_to_hexa(unsigned int num, char c);
+char    *ft_unsigned(unsigned int num);
+char    *ft_decimal(int num);
+void    ft_print_decimal(char c, int flag);
 #endif
