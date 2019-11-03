@@ -6,7 +6,7 @@
 /*   By: alzaynou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/31 13:06:55 by alzaynou          #+#    #+#             */
-/*   Updated: 2019/11/03 22:31:55 by alzaynou         ###   ########.fr       */
+/*   Updated: 2019/11/04 00:11:54 by alzaynou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,5 +48,9 @@ void    ft_print_decimal(char c, int flag);
 char	*ft_ptr(char c,unsigned long long int num);
 void	ft_print_ptr(char c, unsigned long long int flag);
 int      ft_check_flags2(const char *format, int cnt, va_list ap, t_flags flags);
+char    *ft_long_long_octa(unsigned long long int num);
+char    *ft_long_long_u(unsigned long long int num);
+void    ft_print_long_long_di(long long int flag);
+char    *ft_long_long_di(long long int num);
 
 #endif

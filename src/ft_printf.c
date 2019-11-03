@@ -6,7 +6,7 @@
 /*   By: alzaynou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/31 13:09:51 by alzaynou          #+#    #+#             */
-/*   Updated: 2019/11/03 22:42:21 by alzaynou         ###   ########.fr       */
+/*   Updated: 2019/11/04 00:24:56 by alzaynou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,24 @@ void	ft_print_ptr(char c, unsigned long long int flag)
 		ft_putstr(str);
 		free(str);
 	}
+	if (c == 'o' || c == 'u')
+	{
+		if (c == 'o')
+			str = ft_long_long_octa(flag);
+		if (c == 'u')
+			str = ft_long_long_u(flag);
+		ft_putstr(str);
+		free(str);
+	}
+}
+
+void	ft_print_long_long_di(long long int flag)
+{
+	char	*str;
+
+	str = ft_long_long_di(flag);
+	ft_putstr(str);
+	free(str);
 }
 
 #include <stdio.h>
@@ -100,8 +118,8 @@ int		main()
 {
 	void *a = "microb";
 	//ft_printf("%")
-	unsigned long long int x =  184467440737095516;
-	ft_printf("ali|%llX|%p|ali|\n", x, &a);
+	long long int x = +1;
+	ft_printf("ali|%lld|%p|ali|\n", x, &a);
 	   printf("ali|%lld|%p|ali|\n", x, &a);
 	return (0);
 }
