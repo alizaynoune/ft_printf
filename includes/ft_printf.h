@@ -6,7 +6,7 @@
 /*   By: alzaynou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/31 13:06:55 by alzaynou          #+#    #+#             */
-/*   Updated: 2019/11/03 16:22:27 by alzaynou         ###   ########.fr       */
+/*   Updated: 2019/11/03 21:33:34 by ybolles          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,4 +44,6 @@ char    *ft_to_hexa(unsigned int num, char c);
 char    *ft_unsigned(unsigned int num);
 char    *ft_decimal(int num);
 void    ft_print_decimal(char c, int flag);
+char	*ft_ptr(unsigned long long int num);
+void	ft_print_ptr(char c, unsigned long long int flag);
 #endif

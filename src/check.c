@@ -6,7 +6,7 @@
 /*   By: alzaynou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/02 19:21:57 by alzaynou          #+#    #+#             */
-/*   Updated: 2019/11/03 19:03:17 by alzaynou         ###   ########.fr       */
+/*   Updated: 2019/11/03 21:32:23 by ybolles          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ int			ft_read_flag(const char *format, int cnt, va_list ap, t_flags flags)
 		if (format[cnt + 1] == 'c' || format[cnt + 1] == 'd' ||
 				format[cnt + 1] == 'i')
 			ft_print_decimal(format[cnt + 1], (va_arg(ap, int)));
+		if(format[cnt + 1] == 'p')
+			ft_print_ptr(format[cnt + 1], (va_arg(ap, unsigned long long int)));
 		cnt ++;
 	}
 	else if (format[cnt + 1] == '%')

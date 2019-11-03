@@ -6,7 +6,7 @@
 /*   By: alzaynou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/02 23:42:41 by alzaynou          #+#    #+#             */
-/*   Updated: 2019/11/03 19:21:30 by alzaynou         ###   ########.fr       */
+/*   Updated: 2019/11/03 21:34:55 by ybolles          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,5 +113,34 @@ char	*ft_decimal(int num)
 	}
 	if (num < 0)
 		str[0] = '-';
+	return (str);
+}
+char	*ft_ptr(unsigned long long int num)
+{
+	unsigned long long int	num1;
+	int				cnt;
+	char			*str;
+	char			*fre;
+
+	num1 = num;
+	cnt = 1;
+	while (num1 > 15)
+	{
+		num1 /= 16;
+		cnt++;
+	}
+	SAFE(str = (char *)malloc(sizeof(char) * (cnt + 1)));
+	str[cnt--] = '\0';
+	while (cnt >= 0)
+	{
+		if ((num % 16) >= 10)
+			str[cnt--] = ((num % 16) % 10) + 'a';
+		else
+			str[cnt--] = (num % 16) + '0';
+		num /= 16;
+	}
+	fre = str;
+	str = ft_strjoin("0x", str);
+	free(fre);
 	return (str);
 }
