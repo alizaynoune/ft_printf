@@ -6,7 +6,7 @@
 /*   By: alzaynou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/31 13:09:51 by alzaynou          #+#    #+#             */
-/*   Updated: 2019/11/03 21:35:27 by ybolles          ###   ########.fr       */
+/*   Updated: 2019/11/03 22:42:21 by alzaynou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ t_flags ft_flags()
 	flags.flg0 = "csp";
 	flags.flg1 = "diouxX";
 	flags.flg2 = "f";
-//	flags.flg1_0 = "hl";
+	flags.flg0_0 = "hlf";
 	return (flags);
 }
 
@@ -78,14 +78,20 @@ void	ft_print_decimal(char c, int flag)
 void	ft_print_ptr(char c, unsigned long long int flag)
 {
 	char *str;
-	
-	if (c == 'p')
+	char *ptr;
+
+	if (c == 'p' || c == 'x' || c == 'X')
 	{
-		str = ft_ptr(flag);
+		str = ft_ptr(c, flag);
+		if (c == 'p')
+		{
+			ptr = str;
+			str = ft_strjoin("0x", str);
+			free(ptr);
+		}
 		ft_putstr(str);
 		free(str);
 	}
-
 }
 
 #include <stdio.h>
@@ -94,9 +100,8 @@ int		main()
 {
 	void *a = "microb";
 	//ft_printf("%")
-	int x =  INT_MIN;
-	ft_printf("%p|%d|%i|%o|%u|%x|%X|%s|%c|%%|\n",&a, 0, x , x*2, x*2, x*2, x*2,"hihi",  x*2);
-
-	   printf("%p|%d|%i|%o|%u|%x|%X|%s|%c|%%|\n",&a, 0, x , x*2, x*2, x*2, x*2,"hihi",  x*2);
+	unsigned long long int x =  184467440737095516;
+	ft_printf("ali|%llX|%p|ali|\n", x, &a);
+	   printf("ali|%lld|%p|ali|\n", x, &a);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: alzaynou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/02 23:42:41 by alzaynou          #+#    #+#             */
-/*   Updated: 2019/11/03 21:34:55 by ybolles          ###   ########.fr       */
+/*   Updated: 2019/11/03 22:30:48 by alzaynou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,12 +115,11 @@ char	*ft_decimal(int num)
 		str[0] = '-';
 	return (str);
 }
-char	*ft_ptr(unsigned long long int num)
+char	*ft_ptr(char c, unsigned long long int num)
 {
 	unsigned long long int	num1;
 	int				cnt;
 	char			*str;
-	char			*fre;
 
 	num1 = num;
 	cnt = 1;
@@ -133,14 +132,13 @@ char	*ft_ptr(unsigned long long int num)
 	str[cnt--] = '\0';
 	while (cnt >= 0)
 	{
-		if ((num % 16) >= 10)
+		if ((num % 16) >= 10 && (c == 'x' || c == 'p'))
 			str[cnt--] = ((num % 16) % 10) + 'a';
+		else if ((num % 16) >= 10 && c == 'X')
+			str[cnt--] = ((num % 16) % 10) + 'A';
 		else
 			str[cnt--] = (num % 16) + '0';
 		num /= 16;
 	}
-	fre = str;
-	str = ft_strjoin("0x", str);
-	free(fre);
 	return (str);
 }

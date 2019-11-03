@@ -6,7 +6,7 @@
 /*   By: alzaynou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/02 19:21:57 by alzaynou          #+#    #+#             */
-/*   Updated: 2019/11/03 21:32:23 by ybolles          ###   ########.fr       */
+/*   Updated: 2019/11/03 22:32:49 by alzaynou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,9 @@ int			ft_read_flag(const char *format, int cnt, va_list ap, t_flags flags)
 			cnt++;
 		ft_putchar(format[cnt]);
 	}
-/*	else if (ft_strchr(flags.flg1_0, format[cnt + 1]))
-		cnt = ft_check_flags2(format, cnt, ap, flags);
-*/	return (cnt);
+	else if (ft_strchr(flags.flg0_0, format[cnt + 1]))
+		cnt = ft_check_flags2(format, cnt + 1, ap, flags);
+	return (cnt);
 }
 
 int			ft_check_flags(char c, t_flags flags)
@@ -49,3 +49,14 @@ int			ft_check_flags(char c, t_flags flags)
 	return (0);
 }
 
+int			ft_check_flags2(const char *format, int cnt, va_list ap, t_flags flags)
+{
+	//	ft_putchar((format[cnt + 2] +1));
+	if (format[cnt] == 'l' && format[cnt + 1] == 'l')
+	{
+		if (format[cnt + 2] == 'x' || format[cnt + 2] == 'X')
+			ft_print_ptr(format[cnt + 2], (va_arg(ap, unsigned long long int)));
+	}
+	cnt += 2;
+	return (cnt);
+}
