@@ -1,0 +1,4 @@
+flags done
+		0 => "%%"
+		1 => "diouxXcsp"
+		3 => "ll => diouxX"
