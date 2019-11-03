@@ -6,7 +6,7 @@
 /*   By: alzaynou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/02 23:42:41 by alzaynou          #+#    #+#             */
-/*   Updated: 2019/11/03 16:41:26 by alzaynou         ###   ########.fr       */
+/*   Updated: 2019/11/03 19:21:30 by alzaynou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,9 +93,9 @@ char	*ft_decimal(int num)
 	int		cnt;
 	char	*str;
 
-	cnt = num >= 0 ? 0 : 1;
+	cnt = num > 0 ? 0 : 1;
 	num1 = num;
-	num1 = num1 > 0 ? num1 : num1 * -1;
+	num1 = num1 < 0 ? num1 * -1 : num1;
 	while (num1 != 0)
 	{
 		num1 /= 10;

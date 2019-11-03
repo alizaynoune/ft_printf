@@ -6,7 +6,7 @@
 /*   By: alzaynou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/31 13:09:51 by alzaynou          #+#    #+#             */
-/*   Updated: 2019/11/03 19:13:52 by alzaynou         ###   ########.fr       */
+/*   Updated: 2019/11/03 19:22:43 by alzaynou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ int		main()
 //	void *a = "ali";
 	//ft_printf("%")
 	int x =  INT_MIN;
-	ft_printf("ali|%d|%i|%o|%u|%x|%X|%s|%c|%%|\n", x, x, x*2, x*2, x*2, x*2, "ali", x*2);
-	   printf("ali|%d|%i|%o|%u|%x|%X|%s|%c|%%|\n", x, x, x*2, x*2, x*2, x*2, "ali", x*2);
+	ft_printf("ali|%d|%i|%o|%u|%x|%X|%s|%c|%%|\n", x *2, x *2, x*2, x*2, x*2, x*2, "ali", x*2);
+	   printf("ali|%d|%i|%o|%u|%x|%X|%s|%c|%%|\n", x *2, x *2, x*2, x*2, x*2, x*2, "ali", x*2);
 	return (0);
 }
