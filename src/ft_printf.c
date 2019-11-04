@@ -6,7 +6,7 @@
 /*   By: alzaynou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/31 13:09:51 by alzaynou          #+#    #+#             */
-/*   Updated: 2019/11/04 00:24:56 by alzaynou         ###   ########.fr       */
+/*   Updated: 2019/11/04 16:54:00 by alzaynou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,14 +112,40 @@ void	ft_print_long_long_di(long long int flag)
 	free(str);
 }
 
+void	ft_print_long_di(long int flag)
+{
+	char	*str;
+
+	str = ft_convert_long_di(flag);
+	ft_putstr(str);
+	free(str);
+}
+
+void	ft_print_ulong(char c, unsigned long int flag)
+{
+	char	*str;
+
+	if (c == 'x' || c == 'X' || c == 'o' || c == 'u')
+	{
+		if (c == 'x' || c == 'X')
+			str = ft_convert_ulong_xX(c, flag);
+		if (c == 'o')
+			str = ft_cnvert_ulong_o(flag);
+		if (c == 'u')
+			str = ft_convert_ulong_u(flag);
+		ft_putstr(str);
+		free(str);
+	}
+}
+
 #include <stdio.h>
 #include <limits.h>
 int		main()
 {
 	void *a = "microb";
 	//ft_printf("%")
-	long long int x = +1;
-	ft_printf("ali|%lld|%p|ali|\n", x, &a);
-	   printf("ali|%lld|%p|ali|\n", x, &a);
+	unsigned long int x = 4294967295;
+	ft_printf("ali|%lu| %%|%p|ali|\n", x, &a);
+	   printf("ali|%lu| %%|%p|ali|\n", x, &a);
 	return (0);
 }

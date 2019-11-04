@@ -1,4 +1,5 @@
 flags done
 		0 => "%%"
 		1 => "diouxXcsp"
+		2 => "l => diouxX"
 		3 => "ll => diouxX"
