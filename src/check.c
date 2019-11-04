@@ -6,7 +6,7 @@
 /*   By: alzaynou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/02 19:21:57 by alzaynou          #+#    #+#             */
-/*   Updated: 2019/11/04 16:51:14 by alzaynou         ###   ########.fr       */
+/*   Updated: 2019/11/04 17:39:23 by alzaynou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,12 @@ int			ft_check_flags2(const char *format, int cnt, va_list ap, t_flags flags)
 		if (format[cnt + 2] == 'i' || format[cnt + 2] == 'd')
 			ft_print_long_long_di(va_arg(ap, long long int));
 		cnt += 2;
+	}
+	else if (format[cnt] == 'h' && ft_strchr(flags.flg1, format[cnt + 1]))
+	{
+		if (format[cnt + 1] == 'd' || format[cnt + 1] == 'i')
+			ft_print_short_di(format[cnt + 1], (short int)(va_arg(ap, int)));
+		cnt++;
 	}
 	return (cnt);
 }
