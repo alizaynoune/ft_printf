@@ -6,7 +6,7 @@
 /*   By: alzaynou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/31 13:09:51 by alzaynou          #+#    #+#             */
-/*   Updated: 2019/11/04 17:46:59 by alzaynou         ###   ########.fr       */
+/*   Updated: 2019/11/04 18:44:40 by alzaynou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,14 +150,28 @@ void	ft_print_short_di(char c, short int flag)
 	}
 }
 
+void	ft_print_ushort(char c, unsigned short int flag)
+{
+	char	*str;
+
+	if (c == 'x' || c == 'X')
+		str = ft_convert_ushort_xX(c, flag);
+	if (c == 'o')
+		str = ft_convert_ushort_o(flag);
+	if (c == 'u')
+		str = ft_convert_ushort_u(flag);
+	ft_putstr(str);
+	free(str);
+}
+
 #include <stdio.h>
 #include <limits.h>
 int		main()
 {
 	void *a = "microb";
 	//ft_printf("%")
-	short int x = -32768;
-	ft_printf("ali|%hi| %%|%p|ali|\n", x, &a);
-	   printf("ali|%-20.d| %%|%p|ali|\n", 0, &a);
+	unsigned short int x = 65535;
+	ft_printf("ali|%hu| %%|%p|ali|\n", x, &a);
+	   printf("ali|%hu| %%|%p|ali|\n", x, &a);
 	return (0);
 }

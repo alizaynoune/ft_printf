@@ -6,7 +6,7 @@
 /*   By: alzaynou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/31 13:06:55 by alzaynou          #+#    #+#             */
-/*   Updated: 2019/11/04 17:20:13 by alzaynou         ###   ########.fr       */
+/*   Updated: 2019/11/04 18:42:12 by alzaynou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,5 +60,9 @@ char    *ft_cnvert_ulong_o(unsigned long int num);
 char    *ft_convert_ulong_u(unsigned long int num);
 void    ft_print_short_di(char c, short int flag);
 char    *ft_convert_short_di(short int num);
+void    ft_print_ushort(char c, unsigned short int flag);
+char    *ft_convert_ushort_xX(char c, unsigned short int num);
+char    *ft_convert_ushort_o(unsigned short int num);
+char    *ft_convert_ushort_u(unsigned short int num);
 
 #endif
