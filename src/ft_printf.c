@@ -6,7 +6,7 @@
 /*   By: alzaynou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/31 13:09:51 by alzaynou          #+#    #+#             */
-/*   Updated: 2019/11/04 16:54:00 by alzaynou         ###   ########.fr       */
+/*   Updated: 2019/11/04 16:59:09 by alzaynou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ t_flags ft_flags()
 	flags.flg0 = "csp";
 	flags.flg1 = "diouxX";
 	flags.flg2 = "f";
-	flags.flg0_0 = "hlf";
+	flags.flg0_0 = "hlL";
 	return (flags);
 }
 
