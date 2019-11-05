@@ -6,36 +6,36 @@
 /*   By: alzaynou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/02 19:21:57 by alzaynou          #+#    #+#             */
-/*   Updated: 2019/11/04 18:42:52 by alzaynou         ###   ########.fr       */
+/*   Updated: 2019/11/05 18:44:59 by alzaynou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-int			ft_read_flag(const char *format, int cnt, va_list ap, t_flags flags)
+t_flags			ft_read_flag(const char *format, va_list ap, t_flags flags)
 {
-	if (ft_check_flags(format[cnt + 1], flags))
+//	flags = ft_read_prec(format, flags);
+	if (ft_check_flags(FORM1, flags))
 	{
-		if (format[cnt + 1] == 'o' || format[cnt + 1] == 'x' ||
-				format[cnt + 1] == 'X' || format[cnt + 1] == 'u')
-			ft_print_flags(format[cnt + 1], (va_arg(ap, unsigned int)));
-		if (format[cnt + 1] == 's')
-			ft_putstr(va_arg(ap, char*));
-		if (format[cnt + 1] == 'c' || format[cnt + 1] == 'd' ||
-				format[cnt + 1] == 'i')
-			ft_print_decimal(format[cnt + 1], (va_arg(ap, int)));
-		if(format[cnt + 1] == 'p')
-			ft_print_ptr(format[cnt + 1], (va_arg(ap, unsigned long long int)));
-		cnt ++;
+		if (FORM1 == 'o' || FORM1 == 'x' || FORM1 == 'X' || FORM1 == 'u')
+			RTN += ft_print_flags(FORM1, (va_arg(ap, unsigned int)));
+		if (FORM1 == 's')
+			RTN += ft_print_str(va_arg(ap, char*));
+		if (FORM1 == 'c' || FORM1 == 'd' || FORM1 == 'i')
+			RTN += ft_print_decimal(FORM1, (va_arg(ap, int)));
+		if(FORM1 == 'p')
+			RTN += ft_print_ptr(FORM1, (va_arg(ap, unsigned long long int)));
+		CNT++;
 	}
-	else if (format[cnt + 1] == '%')
+	else if (FORM1 == '%')
 	{
-			cnt++;
-		ft_putchar(format[cnt]);
+			CNT++;
+			RTN++;
+		ft_putchar(FORM0);
 	}
-	else if (ft_strchr(flags.flg0_0, format[cnt + 1]))
-		cnt = ft_check_flags2(format, cnt + 1, ap, flags);
-	return (cnt);
+	else if (ft_strchr(flags.flg0_0, FORM1))
+		flags = ft_check_flags2(format, ap, flags);
+	return (flags);
 }
 
 int			ft_check_flags(char c, t_flags flags)
@@ -49,32 +49,47 @@ int			ft_check_flags(char c, t_flags flags)
 	return (0);
 }
 
-int			ft_check_flags2(const char *format, int cnt, va_list ap, t_flags flags)
+t_flags			ft_check_flags2(const char *format, va_list ap, t_flags flags)
 {
-	if (format[cnt] == 'l' && ft_strchr(flags.flg1, format[cnt + 1]))
+	if (FORM1 == 'l' && ft_strchr(flags.flg1, FORM2))
 	{
-		if (format[cnt + 1] == 'd' || format[cnt + 1] == 'i')
-			ft_print_long_di((va_arg(ap, long int)));
-		if (format[cnt + 1] == 'x' || format[cnt + 1] == 'X' || format[cnt + 1] == 'o' ||
-				format[cnt + 1] == 'u')
-			ft_print_ulong(format[cnt + 1], va_arg(ap, unsigned long int));
-		cnt++;
+		if (FORM2 == 'd' || FORM2 == 'i')
+			RTN += ft_print_long_di((va_arg(ap, long int)));
+		if (FORM2 == 'x' || FORM2 == 'X' || FORM2 == 'o' ||FORM2 == 'u')
+			RTN += ft_print_ulong(FORM2, va_arg(ap, unsigned long int));
+		CNT += 2;
 	}
-	if (format[cnt] == 'l' && format[cnt + 1] == 'l' && ft_strchr(flags.flg1, format[cnt + 2]))
+	if (FORM1 == 'l' && FORM2 == 'l' && ft_strchr(flags.flg1, FORM3))
 	{
-		if (format[cnt + 2] == 'x' || format[cnt + 2] == 'X' || format[cnt + 2] == 'o' || format[cnt + 2] == 'u')
-			ft_print_ptr(format[cnt + 2], (va_arg(ap, unsigned long long int)));
-		if (format[cnt + 2] == 'i' || format[cnt + 2] == 'd')
-			ft_print_long_long_di(va_arg(ap, long long int));
-		cnt += 2;
+		if (FORM3 == 'x' || FORM3 == 'X' || FORM3 == 'o' || FORM3 == 'u')
+			RTN += ft_print_ptr(FORM3, (va_arg(ap, unsigned long long int)));
+		if (FORM3 == 'i' || FORM3 == 'd')
+			RTN += ft_print_long_long_di(va_arg(ap, long long int));
+		CNT += 3;
 	}
-	else if (format[cnt] == 'h' && ft_strchr(flags.flg1, format[cnt + 1]))
+	else if (FORM1 == 'h' && ft_strchr(flags.flg1, FORM2))
 	{
-		if (format[cnt + 1] == 'd' || format[cnt + 1] == 'i')
-			ft_print_short_di(format[cnt + 1], (short int)(va_arg(ap, int)));
-		if (format[cnt + 1] == 'x' || format[cnt + 1] == 'X' || format[cnt + 1] == 'o' || format[cnt + 1] == 'u')
-			ft_print_ushort(format[cnt + 1], (unsigned short int)(va_arg(ap, unsigned int)));
-		cnt++;
+		if (FORM2 == 'd' || FORM2 == 'i')
+			RTN += ft_print_short_di((short int)(va_arg(ap, int)));
+		if (FORM2 == 'x' || FORM2 == 'X' || FORM2 == 'o' || FORM2 == 'u')
+			RTN += ft_print_ushort(FORM2, (unsigned short int)(va_arg(ap, unsigned int)));
+		CNT += 2;
 	}
-	return (cnt);
+	else if (FORM1 == 'h' && FORM2 == 'h' && ft_strchr(flags.flg1, FORM3))
+	{
+		if (FORM3 == 'd' || FORM3 == 'i')
+			RTN += ft_print_schar_di((char)(va_arg(ap, int)));
+		if (FORM3 == 'x' || FORM3 == 'X' || FORM3 == 'o' || FORM3 == 'u')
+			RTN += ft_print_uchar(FORM3, (unsigned char)((va_arg(ap, unsigned int))));
+		CNT += 3;
+	}
+	return (flags);
 }
+
+/*t_flags		ft_read_prec(const char *format, t_flags flags)
+{
+	if (FORM1 >= '0' || FORM1 <= '9')
+	{
+
+	}
+}*/
