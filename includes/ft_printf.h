@@ -6,7 +6,7 @@
 /*   By: alzaynou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/31 13:06:55 by alzaynou          #+#    #+#             */
-/*   Updated: 2019/11/05 22:13:08 by alzaynou         ###   ########.fr       */
+/*   Updated: 2019/11/05 22:42:43 by alzaynou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ typedef struct s_flags
 	int		cnt;
 	int		nbret;
 	int		prec;
+	char	chr;
 }				t_flags;
 
 # define SAFE(expr) if (!(expr)) exit (0)

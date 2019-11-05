@@ -6,7 +6,7 @@
 /*   By: alzaynou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/02 19:21:57 by alzaynou          #+#    #+#             */
-/*   Updated: 2019/11/05 22:13:18 by alzaynou         ###   ########.fr       */
+/*   Updated: 2019/11/05 23:51:29 by alzaynou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,8 @@ t_flags		ft_read_prec(const char *format, t_flags flags)
 		sgn = FORM1 == '-' ? -1 : sgn;
 		CNT++;
 	}
+	flags.chr = FORM1 == '0' ? '0' : ' ';
+	flags.chr = sgn == -1 ? ' ' : flags.chr;
 	while (FORM1 >= '0' && FORM1 <= '9')
 	{
 		flags.prec = (flags.prec * 10) + (FORM1 - '0');
@@ -122,7 +124,7 @@ t_flags		ft_print_all(t_flags flags, char *str, int len)
 		ft_putstr(str);
 		while (flags.prec > 0)
 		{
-			ft_putchar(' ');
+			ft_putchar(flags.chr);
 			flags.prec--;
 			RTN++;
 		}
@@ -133,7 +135,7 @@ t_flags		ft_print_all(t_flags flags, char *str, int len)
 		flags.prec -= len;
 		while (flags.prec > 0)
 		{
-			ft_putchar(' ');
+			ft_putchar(flags.chr);
 			flags.prec--;
 			RTN++;
 		}

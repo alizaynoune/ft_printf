@@ -6,7 +6,7 @@
 /*   By: alzaynou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/31 13:09:51 by alzaynou          #+#    #+#             */
-/*   Updated: 2019/11/05 22:27:54 by alzaynou         ###   ########.fr       */
+/*   Updated: 2019/11/05 23:51:32 by alzaynou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -203,11 +203,11 @@ t_flags		ft_print_schar_di(t_flags flags, signed char flag)
 #include <limits.h>
 int		main()
 {
-	char *x = "microb";
+	char *x = "a";
 	//ft_printf("%")
-	int a = 65535;
+//	int a = 65535;
 	//unsigned char i = 255;
-	ft_printf("%d\n", ft_printf("ali|%2000d|%1000s|\n",a,x));
-	   printf("%d\n",    printf("ali|%2000d|%1000s|\n",a,x));
+	//ft_printf("%d\n", ft_printf("%-2147483648s\n",x));
+	   printf("%d\n",    printf("%2147483648s\n", x));
 	return (0);
 }
