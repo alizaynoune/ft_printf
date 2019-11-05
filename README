@@ -2,4 +2,4 @@ flags done
 		0 => "%%"
 		1 => "diouxXcsp"
 		2 => "l => diouxX" "h => diouxX"
-		3 => "ll => diouxX"
+		3 => "ll => diouxX" "hh => diouxX"
