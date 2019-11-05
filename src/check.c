@@ -6,7 +6,7 @@
 /*   By: alzaynou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/02 19:21:57 by alzaynou          #+#    #+#             */
-/*   Updated: 2019/11/05 18:44:59 by alzaynou         ###   ########.fr       */
+/*   Updated: 2019/11/05 22:13:18 by alzaynou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,18 @@
 
 t_flags			ft_read_flag(const char *format, va_list ap, t_flags flags)
 {
-//	flags = ft_read_prec(format, flags);
+	if (ft_strchr(flags.flgx, FORM1))
+		flags = ft_read_prec(format, flags);
 	if (ft_check_flags(FORM1, flags))
 	{
 		if (FORM1 == 'o' || FORM1 == 'x' || FORM1 == 'X' || FORM1 == 'u')
-			RTN += ft_print_flags(FORM1, (va_arg(ap, unsigned int)));
+			flags = ft_print_flags(flags, FORM1, (va_arg(ap, unsigned int)));
 		if (FORM1 == 's')
-			RTN += ft_print_str(va_arg(ap, char*));
+			flags = ft_print_str(flags, va_arg(ap, char*));
 		if (FORM1 == 'c' || FORM1 == 'd' || FORM1 == 'i')
-			RTN += ft_print_decimal(FORM1, (va_arg(ap, int)));
+			flags = ft_print_decimal(flags, FORM1, (va_arg(ap, int)));
 		if(FORM1 == 'p')
-			RTN += ft_print_ptr(FORM1, (va_arg(ap, unsigned long long int)));
+			flags = ft_print_ptr(flags, FORM1, (va_arg(ap, unsigned long long int)));
 		CNT++;
 	}
 	else if (FORM1 == '%')
@@ -54,42 +55,90 @@ t_flags			ft_check_flags2(const char *format, va_list ap, t_flags flags)
 	if (FORM1 == 'l' && ft_strchr(flags.flg1, FORM2))
 	{
 		if (FORM2 == 'd' || FORM2 == 'i')
-			RTN += ft_print_long_di((va_arg(ap, long int)));
+			flags = ft_print_long_di(flags, va_arg(ap, long int));
 		if (FORM2 == 'x' || FORM2 == 'X' || FORM2 == 'o' ||FORM2 == 'u')
-			RTN += ft_print_ulong(FORM2, va_arg(ap, unsigned long int));
+			flags = ft_print_ulong(flags, FORM2, va_arg(ap, unsigned long int));
 		CNT += 2;
 	}
 	if (FORM1 == 'l' && FORM2 == 'l' && ft_strchr(flags.flg1, FORM3))
 	{
 		if (FORM3 == 'x' || FORM3 == 'X' || FORM3 == 'o' || FORM3 == 'u')
-			RTN += ft_print_ptr(FORM3, (va_arg(ap, unsigned long long int)));
+			flags = ft_print_ptr(flags, FORM3, (va_arg(ap, unsigned long long int)));
 		if (FORM3 == 'i' || FORM3 == 'd')
-			RTN += ft_print_long_long_di(va_arg(ap, long long int));
+			flags = ft_print_long_long_di(flags, va_arg(ap, long long int));
 		CNT += 3;
 	}
 	else if (FORM1 == 'h' && ft_strchr(flags.flg1, FORM2))
 	{
 		if (FORM2 == 'd' || FORM2 == 'i')
-			RTN += ft_print_short_di((short int)(va_arg(ap, int)));
+			flags = ft_print_short_di(flags, (short int)(va_arg(ap, int)));
 		if (FORM2 == 'x' || FORM2 == 'X' || FORM2 == 'o' || FORM2 == 'u')
-			RTN += ft_print_ushort(FORM2, (unsigned short int)(va_arg(ap, unsigned int)));
+			flags = ft_print_ushort(flags, FORM2, (unsigned short int)(va_arg(ap, unsigned int)));
 		CNT += 2;
 	}
 	else if (FORM1 == 'h' && FORM2 == 'h' && ft_strchr(flags.flg1, FORM3))
 	{
 		if (FORM3 == 'd' || FORM3 == 'i')
-			RTN += ft_print_schar_di((char)(va_arg(ap, int)));
+			flags = ft_print_schar_di(flags, (char)(va_arg(ap, int)));
 		if (FORM3 == 'x' || FORM3 == 'X' || FORM3 == 'o' || FORM3 == 'u')
-			RTN += ft_print_uchar(FORM3, (unsigned char)((va_arg(ap, unsigned int))));
+			flags = ft_print_uchar(flags, FORM3, (unsigned char)((va_arg(ap, unsigned int))));
 		CNT += 3;
 	}
 	return (flags);
 }
 
-/*t_flags		ft_read_prec(const char *format, t_flags flags)
+t_flags		ft_read_prec(const char *format, t_flags flags)
 {
-	if (FORM1 >= '0' || FORM1 <= '9')
-	{
+	int	sgn;
+	int cnt;
 
+	cnt = CNT;
+	sgn = 1;
+	while (FORM1 == '-' || FORM1 == '+')
+	{
+		sgn = FORM1 == '-' ? -1 : sgn;
+		CNT++;
 	}
-}*/
+	while (FORM1 >= '0' && FORM1 <= '9')
+	{
+		flags.prec = (flags.prec * 10) + (FORM1 - '0');
+		CNT++;
+	}
+	flags.prec *= sgn;
+	if (!(ft_check_flags(FORM1, flags) || ft_strchr(flags.flg0_0, FORM1)))
+	{
+		CNT = cnt;
+		flags.prec = 0;
+	}
+	return (flags);
+}
+
+t_flags		ft_print_all(t_flags flags, char *str, int len)
+{
+	if (flags.prec < 0)
+	{
+		RTN += len;
+		flags.prec = (flags.prec * -1) - len;
+		ft_putstr(str);
+		while (flags.prec > 0)
+		{
+			ft_putchar(' ');
+			flags.prec--;
+			RTN++;
+		}
+	}
+	else
+	{
+		RTN += len;
+		flags.prec -= len;
+		while (flags.prec > 0)
+		{
+			ft_putchar(' ');
+			flags.prec--;
+			RTN++;
+		}
+		ft_putstr(str);
+	}
+	flags.prec = 0;
+	return (flags);
+}
