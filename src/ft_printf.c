@@ -6,7 +6,7 @@
 /*   By: alzaynou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/31 13:09:51 by alzaynou          #+#    #+#             */
-/*   Updated: 2019/11/05 23:51:32 by alzaynou         ###   ########.fr       */
+/*   Updated: 2019/11/06 19:23:21 by alzaynou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,11 @@ t_flags ft_flags()
 	flags.flg1 = "diouxX";
 	flags.flg2 = "f";
 	flags.flg0_0 = "hlL";
-	flags.flgx = "#+- 0123456789";
+	flags.flgx = "#+- 0123456789.";
 	flags.cnt = 0;
 	flags.nbret = 0;
 	flags.prec = 0;
+	flags.chr = ' ';
 	return (flags);
 }
 
@@ -55,14 +56,14 @@ t_flags		ft_print_flags(t_flags flags, char c, unsigned int flag)
 {
 	char *str;
 
-		if (c == 'o')
-			str = ft_to_octal(flag);
-		if (c == 'x' || c == 'X')
-			str = ft_to_hexa(flag, c);
-		if (c == 'u')
-			str = ft_unsigned(flag);
-		flags = ft_print_all(flags, str, ft_strlen(str));
-		free(str);
+	if (c == 'o')
+		str = ft_to_octal(flag);
+	if (c == 'x' || c == 'X')
+		str = ft_to_hexa(flag, c);
+	if (c == 'u')
+		str = ft_unsigned(flag);
+	flags = ft_print_all(flags, str, ft_strlen(str));
+	free(str);
 	return (flags);
 }
 
@@ -78,8 +79,12 @@ t_flags		ft_print_decimal(t_flags flags, char c, int flag)
 	}
 	if (c == 'c')
 	{
-		ft_putchar(flag);
-		RTN++;
+		SAFE(str = (char *)malloc(sizeof(char) * 2));
+		str[0] = flag;
+		str[1] = '\0';
+		flags = ft_print_all(flags, str, ft_strlen(str));
+		free (str);
+
 	}
 	return (flags);
 }
@@ -99,12 +104,12 @@ t_flags		ft_print_ptr(t_flags flags, char c, unsigned long long int flag)
 			free(ptr);
 		}
 	}
-		if (c == 'o')
-			str = ft_long_long_octa(flag);
-		if (c == 'u')
-			str = ft_long_long_u(flag);
-		flags = ft_print_all(flags, str, ft_strlen(str));
-		free(str);
+	if (c == 'o')
+		str = ft_long_long_octa(flag);
+	if (c == 'u')
+		str = ft_long_long_u(flag);
+	flags = ft_print_all(flags, str, ft_strlen(str));
+	free(str);
 	return (flags);
 }
 
@@ -132,14 +137,14 @@ t_flags		ft_print_ulong(t_flags flags, char c, unsigned long int flag)
 {
 	char	*str;
 
-		if (c == 'x' || c == 'X')
-			str = ft_convert_ulong_xX(c, flag);
-		if (c == 'o')
-			str = ft_cnvert_ulong_o(flag);
-		if (c == 'u')
-			str = ft_convert_ulong_u(flag);
-		flags = ft_print_all(flags, str, ft_strlen(str));
-		free(str);
+	if (c == 'x' || c == 'X')
+		str = ft_convert_ulong_xX(c, flag);
+	if (c == 'o')
+		str = ft_cnvert_ulong_o(flag);
+	if (c == 'u')
+		str = ft_convert_ulong_u(flag);
+	flags = ft_print_all(flags, str, ft_strlen(str));
+	free(str);
 	return (flags);
 }
 
@@ -170,6 +175,8 @@ t_flags		ft_print_ushort(t_flags flags, char c, unsigned short int flag)
 
 t_flags		ft_print_str(t_flags flags, char *str)
 {
+//	if (!str)
+//		str = "(null)";
 	flags = ft_print_all(flags, str, ft_strlen(str));
 	return (flags);
 }
@@ -202,12 +209,13 @@ t_flags		ft_print_schar_di(t_flags flags, signed char flag)
 #include <stdio.h>
 #include <limits.h>
 int		main()
-{
-	char *x = "a";
-	//ft_printf("%")
+  {
+  char *x = "ali.zaynoune";
+//ft_printf("%")
 //	int a = 65535;
-	//unsigned char i = 255;
-	//ft_printf("%d\n", ft_printf("%-2147483648s\n",x));
-	   printf("%d\n",    printf("%2147483648s\n", x));
-	return (0);
+//unsigned char i = 255;
+ft_printf("%d\n", ft_printf("dfbvdfgvk %.3d fk.h | % | wefh %s |\n", 7,x));
+   printf("%d\n",    printf("dfbvdfgvk %.3d fk.h | % | wefh |%.s|\n", 7,x));
+
+return (0);
 }
