@@ -6,7 +6,7 @@
 /*   By: alzaynou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/02 19:21:57 by alzaynou          #+#    #+#             */
-/*   Updated: 2019/11/08 00:15:56 by alzaynou         ###   ########.fr       */
+/*   Updated: 2019/11/08 00:39:14 by alzaynou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,7 +137,14 @@ t_flags		ft_print_all(t_flags flags, char *str, int len)
 	flags.prec = 0;
 	return (flags);
 }
-
+void		print_space(t_flags flags, int len)
+{
+	while ((flags.nbr1--) - len > 0)
+	{
+		ft_putchar(' ');
+		RTN++;
+	}
+}
 t_flags		print_s(t_flags flags, char *str, int len)
 {
 	int	cnt;
@@ -146,29 +153,9 @@ t_flags		print_s(t_flags flags, char *str, int len)
 	if (flags.sgn == 2)
 	{
 		len = flags.nbr2 >= 0 && len >= flags.nbr2 ? flags.nbr2 : len;
-		while (flags.nbr1 - len > 0)
-		{
-			ft_putchar(' ');
-			flags.nbr1--;
-			RTN++;
-		}
+		print_space(flags, len);
 		while (cnt < len)
 			ft_putchar(str[cnt++]);
-		RTN += len;
-	}
-	else if (flags.sgn == 2)
-	{
-		//flags.nbr2 = flags.nbr2 > len ? len : flags.nbr2;
-		len = flags.nbr2 >= 0 && len >= flags.nbr2 ? flags.nbr2 : len;
-		while (flags.nbr1 - len > 0)
-		{
-			ft_putchar(' ');
-			flags.nbr1--;
-			RTN++;
-		}
-		while (cnt < len)
-			ft_putchar(str[cnt++]);
-			
 		RTN += len;
 	}
 	else if (flags.sgn == 1)
@@ -177,12 +164,7 @@ t_flags		print_s(t_flags flags, char *str, int len)
 		while (cnt < len)
 			ft_putchar(str[cnt++]);
 		RTN += len;
-		while (flags.nbr1 - len > 0)
-		{
-			ft_putchar(' ');
-			flags.nbr1--;
-			RTN++;
-		}
+		print_space(flags, len);
 	}
 	else
 	{

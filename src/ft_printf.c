@@ -6,7 +6,7 @@
 /*   By: alzaynou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/31 13:09:51 by alzaynou          #+#    #+#             */
-/*   Updated: 2019/11/08 00:19:04 by alzaynou         ###   ########.fr       */
+/*   Updated: 2019/11/08 00:29:22 by alzaynou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -218,8 +218,8 @@ t_flags		ft_print_schar_di(t_flags flags, signed char flag)
 int		main()
   {
 	  static char *s = "hi low\0don't print me lol\0";
-ft_printf("%d\n", ft_printf("|%-12.2s|\n", NULL));
-   printf("%d\n",    printf("|%-12.2s|\n", NULL));
+ft_printf("%d\n", ft_printf("|%-16s|\n", "nark nark"));
+   printf("%d\n",    printf("|%-16s|\n", "nark nark"));
 
 
 return (0);
