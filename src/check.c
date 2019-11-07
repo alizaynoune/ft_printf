@@ -6,7 +6,7 @@
 /*   By: alzaynou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/02 19:21:57 by alzaynou          #+#    #+#             */
-/*   Updated: 2019/11/06 17:45:18 by alzaynou         ###   ########.fr       */
+/*   Updated: 2019/11/07 21:53:23 by alzaynou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,39 +89,22 @@ t_flags			ft_check_flags2(const char *format, va_list ap, t_flags flags)
 
 t_flags		ft_read_prec(const char *format, t_flags flags)
 {
-	int	sgn;
-	int cnt;
+	int		cnt;
+	char	*sflg;
 
 	cnt = CNT;
-	sgn = 1;
-	if (FORM1 == '.')
-	{
-		flags.chr = '0';
+	while (ft_strchr(flags.flgx, FORM1))
 		CNT++;
-	}
-	while (FORM1 == '-' || FORM1 == '+')
+	if (ft_strchr(flags.flg1, FORM1) || ft_strchr(flags.flg0, FORM1))
 	{
-		sgn = FORM1 == '-' ? -1 : sgn;
-		CNT++;
-	}
-	flags.chr = FORM1 == '0' ? '0' : flags.chr;
-	flags.chr = sgn == -1 ? ' ' : flags.chr;
-	while (FORM1 >= '0' && FORM1 <= '9')
-	{
-		flags.prec = (flags.prec * 10) + (FORM1 - '0');
-		CNT++;
-	}
-	flags.prec *= sgn;
-	if (FORM1 == '.')
-	{
-		flags.chr = ' ';
-		CNT++;
-	}
-	if (!(ft_check_flags(FORM1, flags) || ft_strchr(flags.flg0_0, FORM1)))
-	{
+		SAFE(sflg = (char *)malloc(sizeof(char) * ((CNT - cnt) + 1)));
 		CNT = cnt;
-		flags.prec = 0;
+		while (ft_strchr(flags.flgx, FORM1))
+			sflg[(CNT++) - cnt] = FORM1;
+		flags = ft_get_precision(flags, sflg);
 	}
+	else
+		CNT = cnt;
 	return (flags);
 }
 
@@ -152,5 +135,47 @@ t_flags		ft_print_all(t_flags flags, char *str, int len)
 		ft_putstr(str);
 	}
 	flags.prec = 0;
+	return (flags);
+}
+#include <stdio.h>
+t_flags		print_s(t_flags flags, char *str, int len)
+{
+	int cnt;
+	char *dst;
+
+	cnt = 0;
+	dst = "(null)";
+/*	if (flags.sgn == -1)
+		ft_putstr(str);*/
+		flags.nbr1 = flags.nbr1 < 0 ? flags.nbr1 * -1 : flags.nbr1;
+	if (flags.nbr1 != 0 || flags.nbr2 != 0)
+	{
+		if(ft_strcmp(dst, str) == 0)
+			len = 0;
+		flags.nbr2 =  len == 0  && flags.nbr2 == 0 ? 0 : flags.nbr2;
+		flags.nbr2 = flags.nbr2 == 0 ? len : flags.nbr2;
+		while ((flags.nbr1 - flags.nbr2) > 0 && flags.sgn == 2)
+		{
+			ft_putchar(' ');
+			flags.nbr1--;
+			RTN++;
+		}
+		while (str[cnt] && flags.nbr2 > cnt && flags.nbr2 != 0)
+			ft_putchar(str[cnt++]);
+		if (flags.nbr2 != cnt)
+			flags.nbr1 += flags.nbr2 - cnt;
+		while ((flags.nbr1 - flags.nbr2) > 0 && flags.sgn == 1)
+		{
+			ft_putchar(' ');
+			flags.nbr1--;
+			RTN++;
+		}
+		RTN += cnt;
+	}
+	else
+	{
+		ft_putstr(str);
+		RTN += len;
+	}
 	return (flags);
 }

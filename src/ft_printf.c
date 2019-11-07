@@ -6,7 +6,7 @@
 /*   By: alzaynou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/31 13:09:51 by alzaynou          #+#    #+#             */
-/*   Updated: 2019/11/06 19:23:21 by alzaynou         ###   ########.fr       */
+/*   Updated: 2019/11/07 21:53:19 by alzaynou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,15 @@ t_flags ft_flags()
 	flags.flg1 = "diouxX";
 	flags.flg2 = "f";
 	flags.flg0_0 = "hlL";
-	flags.flgx = "#+- 0123456789.";
+	flags.flgx = "#+-0123456789.";
 	flags.cnt = 0;
 	flags.nbret = 0;
 	flags.prec = 0;
 	flags.chr = ' ';
+	flags.nbr1 = 0;
+	flags.nbr2 = 0;
+	flags.sgn = 0;
+	flags.isnl = 0;
 	return (flags);
 }
 
@@ -175,9 +179,12 @@ t_flags		ft_print_ushort(t_flags flags, char c, unsigned short int flag)
 
 t_flags		ft_print_str(t_flags flags, char *str)
 {
-//	if (!str)
-//		str = "(null)";
-	flags = ft_print_all(flags, str, ft_strlen(str));
+	if (!str)
+	{
+		str = "(null)";
+		flags.isnl = 1;
+	}
+	flags = print_s(flags, str, ft_strlen(str));
 	return (flags);
 }
 
@@ -210,12 +217,10 @@ t_flags		ft_print_schar_di(t_flags flags, signed char flag)
 #include <limits.h>
 int		main()
   {
-  char *x = "ali.zaynoune";
-//ft_printf("%")
-//	int a = 65535;
-//unsigned char i = 255;
-ft_printf("%d\n", ft_printf("dfbvdfgvk %.3d fk.h | % | wefh %s |\n", 7,x));
-   printf("%d\n",    printf("dfbvdfgvk %.3d fk.h | % | wefh |%.s|\n", 7,x));
+	  static char *s_hidden = "hi low\0don't print me lol\0";
+ft_printf("%d\n", ft_printf("|%10s|\n", NULL));
+   printf("%d\n",    printf("|%10s|\n", NULL));
+
 
 return (0);
 }
