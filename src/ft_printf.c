@@ -6,7 +6,7 @@
 /*   By: alzaynou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/31 13:09:51 by alzaynou          #+#    #+#             */
-/*   Updated: 2019/11/07 21:53:19 by alzaynou         ###   ########.fr       */
+/*   Updated: 2019/11/08 00:19:04 by alzaynou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ t_flags ft_flags()
 	flags.prec = 0;
 	flags.chr = ' ';
 	flags.nbr1 = 0;
-	flags.nbr2 = 0;
+	flags.nbr2 = -1;
 	flags.sgn = 0;
 	flags.isnl = 0;
 	return (flags);
@@ -212,15 +212,15 @@ t_flags		ft_print_schar_di(t_flags flags, signed char flag)
 	free(str);
 	return (flags);
 }
-
+/*
 #include <stdio.h>
 #include <limits.h>
 int		main()
   {
-	  static char *s_hidden = "hi low\0don't print me lol\0";
-ft_printf("%d\n", ft_printf("|%10s|\n", NULL));
-   printf("%d\n",    printf("|%10s|\n", NULL));
+	  static char *s = "hi low\0don't print me lol\0";
+ft_printf("%d\n", ft_printf("|%-12.2s|\n", NULL));
+   printf("%d\n",    printf("|%-12.2s|\n", NULL));
 
 
 return (0);
-}
+}*/
