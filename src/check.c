@@ -6,15 +6,48 @@
 /*   By: alzaynou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/02 19:21:57 by alzaynou          #+#    #+#             */
-/*   Updated: 2019/11/08 00:39:14 by alzaynou         ###   ########.fr       */
+/*   Updated: 2019/11/12 16:13:47 by alzaynou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
+int				ft_many_flags(const char *format, t_flags flags)
+{
+	if (ft_strchr(flags.flg0_0, FORM1))
+	{
+		if (ft_strchr(flags.flg1, FORM2))
+			return (1);
+		if (ft_strchr(flags.flg0_0, FORM2) && ft_strchr(flags.flg1, FORM3))
+			return (2);
+	}
+	return (0);
+}
+
+t_flags			ft_skip_space(const char *format, t_flags flags)
+{
+	int cnt;
+
+	cnt = CNT;
+	while (FORM1 == ' ')
+		CNT++;
+	if (ft_strchr(flags.flgx, FORM1))
+		flags = ft_read_prec(format, flags);
+	if (FORM1 == 'd' || FORM1 == 'i' || (ft_many_flags(format, flags) &&
+				(FORM2 == 'd' || FORM2 == 'i' || FORM3 == 'd' || FORM3 == 'i')))
+		flags.spc = 1;
+		//RTN = print_space(flags, 1, ' ');
+	if (!(ft_strchr(flags.flgx, FORM1) || ft_strchr(flags.flg0_0, FORM1) ||
+			ft_check_flags(FORM1, flags)))
+		CNT = cnt;
+	return (flags);
+}
+
 t_flags			ft_read_flag(const char *format, va_list ap, t_flags flags)
 {
-	if (ft_strchr(flags.flgx, FORM1))
+	if (FORM1 == ' ')
+		flags = ft_skip_space(format, flags);
+	else if (ft_strchr(flags.flgx, FORM1))
 		flags = ft_read_prec(format, flags);
 	if (ft_check_flags(FORM1, flags))
 	{
@@ -86,7 +119,7 @@ t_flags			ft_check_flags2(const char *format, va_list ap, t_flags flags)
 	}
 	return (flags);
 }
-
+/*
 t_flags		ft_read_prec(const char *format, t_flags flags)
 {
 	int		cnt;
@@ -98,16 +131,17 @@ t_flags		ft_read_prec(const char *format, t_flags flags)
 	if (ft_strchr(flags.flg1, FORM1) || ft_strchr(flags.flg0, FORM1))
 	{
 		SAFE(sflg = (char *)malloc(sizeof(char) * ((CNT - cnt) + 1)));
+		sflg[CNT - cnt] = '\0';
 		CNT = cnt;
 		while (ft_strchr(flags.flgx, FORM1))
 			sflg[(CNT++) - cnt] = FORM1;
-		flags = ft_get_precision(flags, sflg);
+		flags = ft_get_precision(flags, sflg, FORM1);
 	}
 	else
 		CNT = cnt;
 	return (flags);
 }
-
+*/
 t_flags		ft_print_all(t_flags flags, char *str, int len)
 {
 	if (flags.prec < 0)
@@ -117,7 +151,7 @@ t_flags		ft_print_all(t_flags flags, char *str, int len)
 		ft_putstr(str);
 		while (flags.prec > 0)
 		{
-			ft_putchar(flags.chr);
+			ft_putchar(' ');
 			flags.prec--;
 			RTN++;
 		}
@@ -128,48 +162,12 @@ t_flags		ft_print_all(t_flags flags, char *str, int len)
 		flags.prec -= len;
 		while (flags.prec > 0)
 		{
-			ft_putchar(flags.chr);
+			ft_putchar(' ');
 			flags.prec--;
 			RTN++;
 		}
 		ft_putstr(str);
 	}
 	flags.prec = 0;
-	return (flags);
-}
-void		print_space(t_flags flags, int len)
-{
-	while ((flags.nbr1--) - len > 0)
-	{
-		ft_putchar(' ');
-		RTN++;
-	}
-}
-t_flags		print_s(t_flags flags, char *str, int len)
-{
-	int	cnt;
-
-	cnt = 0;
-	if (flags.sgn == 2)
-	{
-		len = flags.nbr2 >= 0 && len >= flags.nbr2 ? flags.nbr2 : len;
-		print_space(flags, len);
-		while (cnt < len)
-			ft_putchar(str[cnt++]);
-		RTN += len;
-	}
-	else if (flags.sgn == 1)
-	{
-		len = flags.nbr2 >= 0 && len >= flags.nbr2 ? flags.nbr2 : len;
-		while (cnt < len)
-			ft_putchar(str[cnt++]);
-		RTN += len;
-		print_space(flags, len);
-	}
-	else
-	{
-		ft_putstr(str);
-		RTN += len;
-	}
 	return (flags);
 }

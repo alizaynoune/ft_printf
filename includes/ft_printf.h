@@ -6,7 +6,7 @@
 /*   By: alzaynou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/31 13:06:55 by alzaynou          #+#    #+#             */
-/*   Updated: 2019/11/07 21:28:54 by alzaynou         ###   ########.fr       */
+/*   Updated: 2019/11/14 19:54:46 by alzaynou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,13 @@ typedef struct s_flags
 	int		cnt;
 	int		nbret;
 	int		prec;
-	char	chr;
+	int		isprec;
 	int		sgn;
 	int		nbr1;
 	int		nbr2;
-	int		isnl;
+	int		spc;
+	int		is0;
+	int		isnb2;
 }				t_flags;
 
 # define SAFE(expr) if (!(expr)) exit (0)
@@ -85,7 +87,16 @@ char    *ft_convert_uchar_o(unsigned char num);
 char    *ft_convert_schar_di(signed char num);
 t_flags     ft_read_prec(const char *format, t_flags flags);
 t_flags     ft_print_all(t_flags flags, char *str, int len);
-t_flags     ft_get_precision(t_flags flags, char *sflg);
+t_flags     ft_get_precision(t_flags flags, char *sflg, char c);
 t_flags     print_s(t_flags flags, char *str, int len);
+void		print_pace(t_flags flags, int len);
+t_flags     ft_reset_precision(t_flags flags);
+t_flags     ft_get_precision_s(t_flags flags, char *sflg);
+t_flags     ft_get_prec_di(t_flags flags, char *sflg);
+t_flags     print_di(t_flags flags, char *str, int len);
+t_flags         ft_skip_space(const char *format, t_flags flags);
+int        print_space(t_flags flags, int len, char c);
+int             ft_many_flags(const char *format, t_flags flags);
+long long int   ft_atoi_llint(char *str);
 
 #endif

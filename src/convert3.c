@@ -6,11 +6,26 @@
 /*   By: alzaynou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/04 17:06:01 by alzaynou          #+#    #+#             */
-/*   Updated: 2019/11/05 19:03:32 by alzaynou         ###   ########.fr       */
+/*   Updated: 2019/11/11 20:33:08 by alzaynou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
+#include <stdio.h>
+long long int   ft_atoi_llint(char *str)
+{
+	int             cnt;
+	long long int   num;
+
+	cnt = str[0] == '-' ? 1 : 0;
+	num = 0;
+	while (str[cnt] && ft_isdigit(str[cnt]))
+		num = (num * 10) + (str[cnt++] - '0');
+	num = str[0] == '-' ? num * -1 : num;
+//	printf("|num = %lld|", num);
+	return (num);
+}
+
 
 char	*ft_convert_short_di(short int num)
 {
@@ -189,12 +204,13 @@ char	*ft_convert_uchar_o(unsigned char num)
 
 char	*ft_convert_schar_di(signed char num)
 {
-	signed char	num1;
+	int			num1;
 	char		*str;
 	int			cnt;
 
-	cnt = num <= 0 ? 1 : 0;
-	num1 = num <= 0 ? num * - 1 : num;
+	num1 = (int)(num);
+	cnt = num1 <= 0 ? 1 : 0;
+	num1 = num1 <= 0 ? num1 * - 1 : num1;
 	while (num1 > 0)
 	{
 		num1 /= 10;
@@ -202,13 +218,15 @@ char	*ft_convert_schar_di(signed char num)
 	}
 	SAFE(str = (char *)malloc(sizeof(char) * (cnt + 1)));
 	str[cnt--] = '\0';
-	num1 = num < 0 ? num * - 1 : num;
+	num1 = (int)(num);
+	num1 = num1 < 0 ? num1 * - 1 : num1;
 	while (cnt >= 0)
 	{
 		str[cnt--] = (num1 % 10) + '0';
 		num1 /= 10;
 	}
-	if (num < 0)
+	num1 = (int)(num);
+	if (num1 < 0)
 		str[0] = '-';
 	return (str);
 }

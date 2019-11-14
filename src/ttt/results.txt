@@ -1,0 +1,71 @@
+Test   7 (pct_5w) : FAILED.
+    First line of code: {return test("%5%");}
+      expected output : "    %"
+      your output     : "5-505-055"
+      expected (nonprintable as hex) : "    %"
+      actual   (nonprintable as hex) : "5-505-055"
+
+Test   8 (pct_5wlj) : FAILED.
+    First line of code: {return test("%-5%");}
+      expected output : "%    "
+      your output     : "-505-055"
+      expected (nonprintable as hex) : "%    "
+      actual   (nonprintable as hex) : "-505-055"
+
+Test   9 (pct_5wzp) : FAILED.
+    First line of code: {return test("%05%");}
+      expected output : "0000%"
+      your output     : "05-055"
+      expected (nonprintable as hex) : "0000%"
+      actual   (nonprintable as hex) : "05-055"
+
+Test  10 (pct_5wljzp) : FAILED.
+    First line of code: {return test("%-05%");}
+      expected output : "%    "
+      your output     : "-055"
+      expected (nonprintable as hex) : "%    "
+      actual   (nonprintable as hex) : "-055"
+
+Test 1289 (p_ftfc_5w_throwswarning) : FAILED.
+    First line of code: {return test("%5p", 0);}
+      expected output : "  0x0"
+      your output     : "0x0"
+      expected (nonprintable as hex) : "  0x0"
+      actual   (nonprintable as hex) : "0x0"
+
+Test 1291 (p_width_fit) : FAILED.
+    First line of code: {return test("%70p%70p%70p%70p%70p%70p%70p%70p%70p%70p%70p%70p",&a01,&a02,&a03,&a04,&a05,&a06,&a07,&a08,&a09,&a10,&a11,&a12);      expected output : "                                                           0x101e2cb49                                                           0x101e2cb4a          "
+      your output     : "0x101e2cb490x101e2cb4a0x101e2cb4c0x101e2cb4e0x101e2cb500x101e2cb540x101e2cb580x101e2cb600x101e2cb680x101e2cb700x101e2cb780x101e2cb80"
+      expected (nonprintable as hex) : "                                                           0x101e2cb49                                                           0x101e2cb4a          "
+      actual   (nonprintable as hex) : "0x101e2cb490x101e2cb4a0x101e2cb4c0x101e2cb4e0x101e2cb500x101e2cb540x101e2cb580x101e2cb600x101e2cb680x101e2cb700x101e2cb780x101e2cb80"
+
+Test 1293 (p_width_16) : FAILED.
+    First line of code: {return test("%16p%16p%16p%16p%16p%16p%16p%16p%16p%16p%16p%16p",&a01,&a02,&a03,&a04,&a05,&a06,&a07,&a08,&a09,&a10,&a11,&a12);      expected output : "     0x101e2cb49     0x101e2cb4a     0x101e2cb4c     0x101e2cb4e     0x101e2cb50     0x101e2cb54     0x101e2cb58     0x101e2cb60     0x101e2cb68     0"
+      your output     : "0x101e2cb490x101e2cb4a0x101e2cb4c0x101e2cb4e0x101e2cb500x101e2cb540x101e2cb580x101e2cb600x101e2cb680x101e2cb700x101e2cb780x101e2cb80"
+      expected (nonprintable as hex) : "     0x101e2cb49     0x101e2cb4a     0x101e2cb4c     0x101e2cb4e     0x101e2cb50     0x101e2cb54     0x101e2cb58     0x101e2cb60     0x101e2cb68     0"
+      actual   (nonprintable as hex) : "0x101e2cb490x101e2cb4a0x101e2cb4c0x101e2cb4e0x101e2cb500x101e2cb540x101e2cb580x101e2cb600x101e2cb680x101e2cb700x101e2cb780x101e2cb80"
+
+Test 1295 (p_width_32) : FAILED.
+    First line of code: {return test("%32p%32p%32p%32p%32p%32p%32p%32p%32p%32p%32p%32p",&a01,&a02,&a03,&a04,&a05,&a06,&a07,&a08,&a09,&a10,&a11,&a12);      expected output : "                     0x101e2cb49                     0x101e2cb4a                     0x101e2cb4c                     0x101e2cb4e                     0"
+      your output     : "0x101e2cb490x101e2cb4a0x101e2cb4c0x101e2cb4e0x101e2cb500x101e2cb540x101e2cb580x101e2cb600x101e2cb680x101e2cb700x101e2cb780x101e2cb80"
+      expected (nonprintable as hex) : "                     0x101e2cb49                     0x101e2cb4a                     0x101e2cb4c                     0x101e2cb4e                     0"
+      actual   (nonprintable as hex) : "0x101e2cb490x101e2cb4a0x101e2cb4c0x101e2cb4e0x101e2cb500x101e2cb540x101e2cb580x101e2cb600x101e2cb680x101e2cb700x101e2cb780x101e2cb80"
+
+Test 1296 (p_width_fit_lj) : FAILED.
+    First line of code: {return test("%-70p%-70p%-70p%-70p%-70p%-70p%-70p%-70p%-70p%-70p%-70p%-70p",&a01,&a02,&a03,&a04,&a05,&a06,&a07,&a08,&a09,&a10      expected output : "0x101e2cb49                                                           0x101e2cb4a                                                           0x101e2cb4"
+      your output     : "0x101e2cb490x101e2cb4a0x101e2cb4c0x101e2cb4e0x101e2cb500x101e2cb540x101e2cb580x101e2cb600x101e2cb680x101e2cb700x101e2cb780x101e2cb80"
+      expected (nonprintable as hex) : "0x101e2cb49                                                           0x101e2cb4a                                                           0x101e2cb4"
+      actual   (nonprintable as hex) : "0x101e2cb490x101e2cb4a0x101e2cb4c0x101e2cb4e0x101e2cb500x101e2cb540x101e2cb580x101e2cb600x101e2cb680x101e2cb700x101e2cb780x101e2cb80"
+
+Test 1298 (p_width_16_lj) : FAILED.
+    First line of code: {return test("%-16p%-16p%-16p%-16p%-16p%-16p%-16p%-16p%-16p%-16p%-16p%-16p",&a01,&a02,&a03,&a04,&a05,&a06,&a07,&a08,&a09,&a10      expected output : "0x101e2cb49     0x101e2cb4a     0x101e2cb4c     0x101e2cb4e     0x101e2cb50     0x101e2cb54     0x101e2cb58     0x101e2cb60     0x101e2cb68     0x101e"
+      your output     : "0x101e2cb490x101e2cb4a0x101e2cb4c0x101e2cb4e0x101e2cb500x101e2cb540x101e2cb580x101e2cb600x101e2cb680x101e2cb700x101e2cb780x101e2cb80"
+      expected (nonprintable as hex) : "0x101e2cb49     0x101e2cb4a     0x101e2cb4c     0x101e2cb4e     0x101e2cb50     0x101e2cb54     0x101e2cb58     0x101e2cb60     0x101e2cb68     0x101e"
+      actual   (nonprintable as hex) : "0x101e2cb490x101e2cb4a0x101e2cb4c0x101e2cb4e0x101e2cb500x101e2cb540x101e2cb580x101e2cb600x101e2cb680x101e2cb700x101e2cb780x101e2cb80"
+
+Test 1300 (p_width_32_lj) : FAILED.
+    First line of code: {return test("%-32p%-32p%-32p%-32p%-32p%-32p%-32p%-32p%-32p%-32p%-32p%-32p",&a01,&a02,&a03,&a04,&a05,&a06,&a07,&a08,&a09,&a10      expected output : "0x101e2cb49                     0x101e2cb4a                     0x101e2cb4c                     0x101e2cb4e                     0x101e2cb50           "
+      your output     : "0x101e2cb490x101e2cb4a0x101e2cb4c0x101e2cb4e0x101e2cb500x101e2cb540x101e2cb580x101e2cb600x101e2cb680x101e2cb700x101e2cb780x101e2cb80"
+      expected (nonprintable as hex) : "0x101e2cb49                     0x101e2cb4a                     0x101e2cb4c                     0x101e2cb4e                     0x101e2cb50           "
+      actual   (nonprintable as hex) : "0x101e2cb490x101e2cb4a0x101e2cb4c0x101e2cb4e0x101e2cb500x101e2cb540x101e2cb580x101e2cb600x101e2cb680x101e2cb700x101e2cb780x101e2cb80"
+
