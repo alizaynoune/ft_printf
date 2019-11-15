@@ -6,7 +6,7 @@
 /*   By: alzaynou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/31 13:06:55 by alzaynou          #+#    #+#             */
-/*   Updated: 2019/11/14 19:54:46 by alzaynou         ###   ########.fr       */
+/*   Updated: 2019/11/15 20:29:05 by alzaynou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ typedef struct s_flags
 	int		spc;
 	int		is0;
 	int		isnb2;
+	int		hash;
 }				t_flags;
 
 # define SAFE(expr) if (!(expr)) exit (0)
@@ -57,7 +58,6 @@ t_flags ft_flags();
 char    *ft_to_octal(unsigned int num);
 char    *ft_to_hexa(unsigned int num, char c);
 char    *ft_unsigned(unsigned int num);
-char    *ft_decimal(int num);
 t_flags ft_print_decimal(t_flags flags, char c, int flag);
 char	*ft_ptr(char c,unsigned long long int num);
 t_flags	ft_print_ptr(t_flags flags, char c, unsigned long long int flag);
@@ -93,10 +93,14 @@ void		print_pace(t_flags flags, int len);
 t_flags     ft_reset_precision(t_flags flags);
 t_flags     ft_get_precision_s(t_flags flags, char *sflg);
 t_flags     ft_get_prec_di(t_flags flags, char *sflg);
-t_flags     print_di(t_flags flags, char *str, int len);
+t_flags     print_di(t_flags flags, char *str, int len, char c);
 t_flags         ft_skip_space(const char *format, t_flags flags);
 int        print_space(t_flags flags, int len, char c);
 int             ft_many_flags(const char *format, t_flags flags);
 long long int   ft_atoi_llint(char *str);
+t_flags     ft_get_prec_c(t_flags flags, char *sflg);
+t_flags     print_c(t_flags flags, char c);
+char        *ft_get_hash(char *str);
+t_flags     ft_print_has_xX(t_flags flags, char c);
 
 #endif

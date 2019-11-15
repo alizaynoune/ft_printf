@@ -6,7 +6,7 @@
 /*   By: alzaynou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/02 19:21:57 by alzaynou          #+#    #+#             */
-/*   Updated: 2019/11/12 16:13:47 by alzaynou         ###   ########.fr       */
+/*   Updated: 2019/11/14 22:57:52 by alzaynou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ t_flags			ft_skip_space(const char *format, t_flags flags)
 	if (FORM1 == 'd' || FORM1 == 'i' || (ft_many_flags(format, flags) &&
 				(FORM2 == 'd' || FORM2 == 'i' || FORM3 == 'd' || FORM3 == 'i')))
 		flags.spc = 1;
-		//RTN = print_space(flags, 1, ' ');
 	if (!(ft_strchr(flags.flgx, FORM1) || ft_strchr(flags.flg0_0, FORM1) ||
 			ft_check_flags(FORM1, flags)))
 		CNT = cnt;
@@ -119,29 +118,7 @@ t_flags			ft_check_flags2(const char *format, va_list ap, t_flags flags)
 	}
 	return (flags);
 }
-/*
-t_flags		ft_read_prec(const char *format, t_flags flags)
-{
-	int		cnt;
-	char	*sflg;
 
-	cnt = CNT;
-	while (ft_strchr(flags.flgx, FORM1))
-		CNT++;
-	if (ft_strchr(flags.flg1, FORM1) || ft_strchr(flags.flg0, FORM1))
-	{
-		SAFE(sflg = (char *)malloc(sizeof(char) * ((CNT - cnt) + 1)));
-		sflg[CNT - cnt] = '\0';
-		CNT = cnt;
-		while (ft_strchr(flags.flgx, FORM1))
-			sflg[(CNT++) - cnt] = FORM1;
-		flags = ft_get_precision(flags, sflg, FORM1);
-	}
-	else
-		CNT = cnt;
-	return (flags);
-}
-*/
 t_flags		ft_print_all(t_flags flags, char *str, int len)
 {
 	if (flags.prec < 0)

@@ -6,11 +6,21 @@
 /*   By: alzaynou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/08 14:36:31 by alzaynou          #+#    #+#             */
-/*   Updated: 2019/11/14 22:23:24 by alzaynou         ###   ########.fr       */
+/*   Updated: 2019/11/15 20:36:36 by alzaynou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
+
+t_flags		ft_print_has_xX(t_flags flags, char c)
+{
+	if (c == 'x')
+		ft_putstr("0x");
+	if (c == 'X')
+		ft_putstr("0X");
+	RTN += 2;
+	return (flags);
+}
 
 int        print_space(t_flags flags, int len, char c)
 {
@@ -42,28 +52,24 @@ t_flags     print_s(t_flags flags, char *str, int len)
 	return (flags);
 }
 
-t_flags		print_di(t_flags flags, char *str, int len)
+t_flags		print_di(t_flags flags, char *str, int len, char c)
 {
 	int cnt;
 
 	cnt = 0;
-/*
-		ft_putchar('"');
-		ft_putnbr(flags.nbr1);
-		ft_putchar('.');
-		ft_putnbr(flags.nbr2);
-		ft_putchar('"');
-		ft_putnbr(flags.is0);
-		ft_putchar('"');
-		ft_putnbr(flags.sgn);
-		ft_putchar('"');
-		ft_putnbr(flags.prec);*/
-		//ft_putnbr(flags.is0);
 	if (flags.isprec)
 	{
+		if (str[0] != '0' && flags.hash && (c == 'x' || c == 'X'))
+		{
+			flags.nbr1--;
+			if (flags.nbr2 < len && !flags.sgn)
+				flags.nbr1--;
+			if (flags.is0)
+				flags.nbr2 -= 2;
+			cnt++;
+		}
 		flags.spc = flags.prec || str[0] == '-' ? 0 : flags.spc;
-		//if (flags.sgn)
-			RTN = print_space(flags, flags.spc , ' ');
+		RTN = print_space(flags, flags.spc , ' ');
 		flags.prec = str[0] == '-' ? 0 : flags.prec;
 		if (str[0] == '-' && !flags.is0)
 			cnt++;
@@ -72,7 +78,15 @@ t_flags		print_di(t_flags flags, char *str, int len)
 		flags.nbr1 = flags.spc || flags.prec ? flags.nbr1 - 1 : flags.nbr1;
 		if (str[0] == '0' && !flags.is0 && !flags.nbr2 && !flags.isnb2)
 			len--;
-		if (!flags.sgn && flags.nbr2 >= len)
+	/*	if (len && flags.hash && (c == 'x' || c == 'X'))
+		{
+			flags.nbr1 -= 2;
+			if (flags.nbr2 >= 2)
+			flags.nbr2 -= 2;
+			else
+				flags.nbr2 = 0;
+		}
+	*/	if (!flags.sgn && flags.nbr2 >= len)
 			RTN = print_space(flags, flags.nbr1 - (flags.nbr2 + cnt) , ' ');
 		else if (!flags.sgn && flags.nbr2 < len)
 			RTN = print_space(flags, flags.nbr1 - len , ' ');
@@ -81,9 +95,11 @@ t_flags		print_di(t_flags flags, char *str, int len)
 			len--;
 			RTN++;
 		}
-	if (str[0] == '-')
+		if (str[0] == '-')
 			print_space(flags, 1 , '-');
 		RTN = print_space(flags, flags.prec , '+');
+		if (cnt && flags.hash && (c == 'x' || c == 'X'))
+			flags = ft_print_has_xX(flags, c);
 		if (flags.nbr2 > len)
 			RTN = print_space(flags, flags.nbr2 - len , '0');
 		if (str[0] == '-')
@@ -103,5 +119,16 @@ t_flags		print_di(t_flags flags, char *str, int len)
 	}
 	RTN += len;
 	flags = ft_reset_precision(flags);
+	return (flags);
+}
+
+t_flags		print_c(t_flags flags, char c)
+{
+	if (!flags.sgn)
+		RTN = print_space(flags, flags.nbr1 - 1 , ' ');
+	ft_putchar(c);
+	if (flags.sgn)
+		RTN = print_space(flags, flags.nbr1 - 1 , ' ');
+	RTN++;
 	return (flags);
 }

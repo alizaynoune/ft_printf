@@ -1,5 +1,10 @@
 flags done
 		0 => "%%"
 		1 => "diouxXcsp"
-		2 => "l => diouxX" "h => diouxX"
-		3 => "ll => diouxX" "hh => diouxX"
+		2 => "l h => diouxX" "h => diouxX"
+		3 => "ll  hh => diouxX" "hh => diouxX"
+		4 => "prec && whith && # => diouxcsp"
+flags not done
+		0 => "f"
+		1 => "Lf lf"
+		2 => "prec && whith && # => f"

@@ -12,20 +12,6 @@
 
 #include "../includes/ft_printf.h"
 #include <stdio.h>
-long long int   ft_atoi_llint(char *str)
-{
-	int             cnt;
-	long long int   num;
-
-	cnt = str[0] == '-' ? 1 : 0;
-	num = 0;
-	while (str[cnt] && ft_isdigit(str[cnt]))
-		num = (num * 10) + (str[cnt++] - '0');
-	num = str[0] == '-' ? num * -1 : num;
-//	printf("|num = %lld|", num);
-	return (num);
-}
-
 
 char	*ft_convert_short_di(short int num)
 {

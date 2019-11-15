@@ -6,7 +6,7 @@
 /*   By: alzaynou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/31 13:09:51 by alzaynou          #+#    #+#             */
-/*   Updated: 2019/11/14 22:32:12 by alzaynou         ###   ########.fr       */
+/*   Updated: 2019/11/15 20:36:32 by alzaynou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,9 @@
 
 int     ft_printf(const char *format, ...)
 {
-	//int		cnt;
 	t_flags flags;
 	va_list ap;
 
-	//cnt = 0;
 	flags = ft_flags();
 	va_start(ap, format);
 	while (format[CNT])
@@ -54,12 +52,14 @@ t_flags ft_flags()
 	flags.sgn = 0;
 	flags.spc = 0;
 	flags.is0 = 0;
+	flags.hash = 0;
 	return (flags);
 }
 
 t_flags		ft_print_flags(t_flags flags, char c, unsigned int flag)
 {
 	char *str;
+	int		len;
 
 	if (c == 'o')
 		str = ft_to_octal(flag);
@@ -67,7 +67,12 @@ t_flags		ft_print_flags(t_flags flags, char c, unsigned int flag)
 		str = ft_to_hexa(flag, c);
 	if (c == 'u')
 		str = ft_unsigned(flag);
-	flags = ft_print_all(flags, str, ft_strlen(str));
+	len = ft_strlen(str);
+	if (flags.hash && c == 'o' && flags.nbr2 <= len && str[0] != '0')
+		flags.nbr2 = len + 1;
+	else if (flags.hash && c == 'o' && flags.nbr2 == 0 && str[0] == '0')
+		flags.nbr2++;
+	flags = print_di(flags, str, ft_strlen(str), c);
 	free(str);
 	return (flags);
 }
@@ -78,20 +83,14 @@ t_flags		ft_print_decimal(t_flags flags, char c, int flag)
 
 	if (c == 'd' || c == 'i')
 	{
-		str = ft_decimal(flag);
-		flags = print_di(flags, str, ft_strlen(str));
-		//ft_putnbr(RTN);
+		//str = ft_decimal(flag);
+		str = ft_itoa(flag);
+		flags = print_di(flags, str, ft_strlen(str), c);
 		free(str);
 	}
 	if (c == 'c')
-	{
-		SAFE(str = (char *)malloc(sizeof(char) * 2));
-		str[0] = flag;
-		str[1] = '\0';
-		flags = ft_print_all(flags, str, ft_strlen(str));
-		free (str);
+		flags = print_c(flags, flag);
 
-	}
 	return (flags);
 }
 
@@ -99,6 +98,7 @@ t_flags		ft_print_ptr(t_flags flags, char c, unsigned long long int flag)
 {
 	char *str;
 	char *ptr;
+	int		len;
 
 	if (c == 'p' || c == 'x' || c == 'X')
 	{
@@ -114,7 +114,13 @@ t_flags		ft_print_ptr(t_flags flags, char c, unsigned long long int flag)
 		str = ft_long_long_octa(flag);
 	if (c == 'u')
 		str = ft_long_long_u(flag);
-	flags = ft_print_all(flags, str, ft_strlen(str));
+	if (c == 'p')
+		flags = ft_print_all(flags, str, ft_strlen(str));
+	len = ft_strlen(str);
+	if (flags.hash && c == 'o' && flags.nbr2 <= len && str[0] != '0')
+		flags.nbr2 = len + 1;
+	if ( c != 'p')	
+		flags = print_di(flags, str, len, c);
 	free(str);
 	return (flags);
 }
@@ -124,8 +130,7 @@ t_flags		ft_print_long_long_di(t_flags flags, long long int flag)
 	char	*str;
 
 	str = ft_long_long_di(flag);
-	//flags = ft_print_all(flags, str, ft_strlen(str));
-	flags = print_di(flags, str, ft_strlen(str));
+	flags = print_di(flags, str, ft_strlen(str), 'd');
 	free(str);
 	return (flags);
 }
@@ -135,8 +140,7 @@ t_flags		ft_print_long_di(t_flags flags, long int flag)
 	char	*str;
 
 	str = ft_convert_long_di(flag);
-//	flags = ft_print_all(flags, str, ft_strlen(str));
-	flags = print_di(flags, str, ft_strlen(str));
+	flags = print_di(flags, str, ft_strlen(str), 'd');
 	free(str);
 	return (flags);
 }
@@ -144,6 +148,7 @@ t_flags		ft_print_long_di(t_flags flags, long int flag)
 t_flags		ft_print_ulong(t_flags flags, char c, unsigned long int flag)
 {
 	char	*str;
+	int		len;
 
 	if (c == 'x' || c == 'X')
 		str = ft_convert_ulong_xX(c, flag);
@@ -151,7 +156,10 @@ t_flags		ft_print_ulong(t_flags flags, char c, unsigned long int flag)
 		str = ft_cnvert_ulong_o(flag);
 	if (c == 'u')
 		str = ft_convert_ulong_u(flag);
-	flags = ft_print_all(flags, str, ft_strlen(str));
+	len = ft_strlen(str);
+	if (flags.hash && c == 'o' && flags.nbr2 <= len && str[0] != '0')
+		flags.nbr2 = len + 1;
+	flags = print_di(flags, str, len, c);
 	free(str);
 	return (flags);
 }
@@ -161,7 +169,7 @@ t_flags		ft_print_short_di(t_flags flags, short int flag)
 	char	*str;
 
 	str = ft_convert_short_di(flag);
-	flags = print_di(flags, str, ft_strlen(str));
+	flags = print_di(flags, str, ft_strlen(str), 'd');
 	free(str);
 	return (flags);
 }
@@ -169,6 +177,7 @@ t_flags		ft_print_short_di(t_flags flags, short int flag)
 t_flags		ft_print_ushort(t_flags flags, char c, unsigned short int flag)
 {
 	char	*str;
+	int		len;
 
 	if (c == 'x' || c == 'X')
 		str = ft_convert_ushort_xX(c, flag);
@@ -176,7 +185,10 @@ t_flags		ft_print_ushort(t_flags flags, char c, unsigned short int flag)
 		str = ft_convert_ushort_o(flag);
 	if (c == 'u')
 		str = ft_convert_ushort_u(flag);
-	flags = ft_print_all(flags, str, ft_strlen(str));
+	len = ft_strlen(str);
+	if (flags.hash && c == 'o' && flags.nbr2 <= len && str[0] != '0')
+		flags.nbr2 = len + 1;
+	flags = print_di(flags, str, len, c);
 	free(str);
 	return (flags);
 }
@@ -192,6 +204,7 @@ t_flags		ft_print_str(t_flags flags, char *str)
 t_flags		ft_print_uchar(t_flags flags, char c, unsigned char flag)
 {
 	char    *str;
+	int		len;
 
 	if (c == 'x' || c == 'X')
 		str = ft_convert_uchar_xX(c, flag);
@@ -199,7 +212,10 @@ t_flags		ft_print_uchar(t_flags flags, char c, unsigned char flag)
 		str = ft_convert_uchar_o(flag);
 	if (c == 'u')
 		str = ft_convert_uchar_u(flag);
-	flags = ft_print_all(flags, str, ft_strlen(str));
+	len = ft_strlen(str);
+	if (flags.hash && c == 'o' && flags.nbr2 <= len && str[0] != '0')
+		flags.nbr2 = len + 1;
+	flags = print_di(flags, str, len, c);
 	free(str);
 	return (flags);
 }
@@ -209,29 +225,23 @@ t_flags		ft_print_schar_di(t_flags flags, signed char flag)
 	char	*str;
 
 	str = ft_convert_schar_di(flag);
-	//flags = ft_print_all(flags, str, ft_strlen(str));
-	flags = print_di(flags, str, ft_strlen(str));
+	flags = print_di(flags, str, ft_strlen(str), 'd');
 	free(str);
 	return (flags);
 }
 
+/*
 #include <stdio.h>
 #include <limits.h>
 int		main()
-  {
-	  void *s = "ali zaynoune";
-	 // int x = 123456;
-printf("%d\n", ft_printf("|%p|\n", s));
-   printf("%d\n", printf("|%p|\n", s));
-/*printf("%d\n", ft_printf("|% 0-8.3d|\n", -3267));
-printf("%d\n",    printf("|% 0-8.3d|\n", -3267));
-printf("%d\n", ft_printf("|%06d|% 7.6d|% d|% 7.0d|%7.0d|%7.6d|% 7.0d|% d|% -7.0d|%7.5d|\n", -9,0,0,0,0,12,12,13,12,-12));
-   printf("%d\n", printf("|%06d|% 7.6d|% d|% 7.0d|%7.0d|%7.6d|% 7.0d|% d|% -7.0d|%7.5d|\n", -9,0,0,0,0,12,12,13,12,-12));
+{
+//	void *s = "ali zaynoune";
+ft_printf("%d\n", ft_printf("|%d|\n", INT_MIN));
+	  printf("%d\n", printf("|%d|\n", INT_MIN));
 
-	  printf("%d\n", ft_printf("|% 3.d|% hhd|% 0-+8.3d|% 0+8.3d|% 0+8.3d|% 010.5d|% 03.7d|%5.3d|\n", -2, (short)(-32768),8375,8473,8375,-216,3267,-10));
-	  printf("%d\n",    printf("|% 3.d|% hhd|% 0-+8.3d|% 0+8.3d|% 0+8.3d|% 010.5d|% 03.7d|%5.3d|\n", -2, (short)(-32768),8375,8473,8375,-216,3267,-10));
-*/
 
-return (0);
+
+
+	return (0);
 }
-
+*/

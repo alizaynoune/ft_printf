@@ -6,7 +6,7 @@
 /*   By: alzaynou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/02 23:42:41 by alzaynou          #+#    #+#             */
-/*   Updated: 2019/11/04 00:22:57 by alzaynou         ###   ########.fr       */
+/*   Updated: 2019/11/15 20:36:39 by alzaynou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,32 +87,6 @@ char	*ft_unsigned(unsigned int num)
 	return (str);
 }
 
-char	*ft_decimal(int num)
-{
-	long	num1;
-	int		cnt;
-	char	*str;
-
-	cnt = num > 0 ? 0 : 1;
-	num1 = num < 0 ? num * -1 : num;
-	while (num1 != 0)
-	{
-		num1 /= 10;
-		cnt++;
-	}
-	SAFE(str = (char *)malloc(sizeof(char) * (cnt + 1)));
-	str[cnt--] = '\0';
-	num1 = num > 0 ? num : num * -1;
-	while (cnt >= 0)
-	{
-		str[cnt] = (num1 % 10) + '0';
-		num1 /= 10;
-		cnt--;
-	}
-	if (num < 0)
-		str[0] = '-';
-	return (str);
-}
 char	*ft_ptr(char c, unsigned long long int num)
 {
 	unsigned long long int	num1;
