@@ -6,7 +6,7 @@
 /*   By: alzaynou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/02 19:21:57 by alzaynou          #+#    #+#             */
-/*   Updated: 2019/11/14 22:57:52 by alzaynou         ###   ########.fr       */
+/*   Updated: 2019/11/16 20:35:57 by alzaynou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,18 +53,14 @@ t_flags			ft_read_flag(const char *format, va_list ap, t_flags flags)
 		if (FORM1 == 'o' || FORM1 == 'x' || FORM1 == 'X' || FORM1 == 'u')
 			flags = ft_print_flags(flags, FORM1, (va_arg(ap, unsigned int)));
 		if (FORM1 == 's')
-			flags = ft_print_str(flags, va_arg(ap, char*));
+			flags = ft_print_str(flags, va_arg(ap, char*), FORM1);
+		if (FORM1 == '%')
+			flags = ft_print_str(flags, "%", FORM1);
 		if (FORM1 == 'c' || FORM1 == 'd' || FORM1 == 'i')
 			flags = ft_print_decimal(flags, FORM1, (va_arg(ap, int)));
 		if(FORM1 == 'p')
 			flags = ft_print_ptr(flags, FORM1, (va_arg(ap, unsigned long long int)));
 		CNT++;
-	}
-	else if (FORM1 == '%')
-	{
-		CNT++;
-		RTN++;
-		ft_putchar(FORM0);
 	}
 	else if (ft_strchr(flags.flg0_0, FORM1))
 		flags = ft_check_flags2(format, ap, flags);
@@ -116,35 +112,5 @@ t_flags			ft_check_flags2(const char *format, va_list ap, t_flags flags)
 			flags = ft_print_uchar(flags, FORM3, (unsigned char)((va_arg(ap, unsigned int))));
 		CNT += 3;
 	}
-	return (flags);
-}
-
-t_flags		ft_print_all(t_flags flags, char *str, int len)
-{
-	if (flags.prec < 0)
-	{
-		RTN += len;
-		flags.prec = (flags.prec * -1) - len;
-		ft_putstr(str);
-		while (flags.prec > 0)
-		{
-			ft_putchar(' ');
-			flags.prec--;
-			RTN++;
-		}
-	}
-	else
-	{
-		RTN += len;
-		flags.prec -= len;
-		while (flags.prec > 0)
-		{
-			ft_putchar(' ');
-			flags.prec--;
-			RTN++;
-		}
-		ft_putstr(str);
-	}
-	flags.prec = 0;
 	return (flags);
 }

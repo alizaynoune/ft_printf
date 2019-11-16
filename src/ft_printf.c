@@ -6,7 +6,7 @@
 /*   By: alzaynou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/31 13:09:51 by alzaynou          #+#    #+#             */
-/*   Updated: 2019/11/15 20:36:32 by alzaynou         ###   ########.fr       */
+/*   Updated: 2019/11/16 20:54:15 by alzaynou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ t_flags ft_flags()
 {
 	t_flags flags;
 
-	flags.flg0 = "csp";
+	flags.flg0 = "csp%";
 	flags.flg1 = "diouxX";
 	flags.flg2 = "f";
 	flags.flg0_0 = "hl";
@@ -83,7 +83,6 @@ t_flags		ft_print_decimal(t_flags flags, char c, int flag)
 
 	if (c == 'd' || c == 'i')
 	{
-		//str = ft_decimal(flag);
 		str = ft_itoa(flag);
 		flags = print_di(flags, str, ft_strlen(str), c);
 		free(str);
@@ -97,29 +96,21 @@ t_flags		ft_print_decimal(t_flags flags, char c, int flag)
 t_flags		ft_print_ptr(t_flags flags, char c, unsigned long long int flag)
 {
 	char *str;
-	char *ptr;
+//	char *ptr;
 	int		len;
 
 	if (c == 'p' || c == 'x' || c == 'X')
-	{
 		str = ft_ptr(c, flag);
-		if (c == 'p')
-		{
-			ptr = str;
-			str = ft_strjoin("0x", str);
-			free(ptr);
-		}
-	}
 	if (c == 'o')
 		str = ft_long_long_octa(flag);
 	if (c == 'u')
 		str = ft_long_long_u(flag);
-	if (c == 'p')
-		flags = ft_print_all(flags, str, ft_strlen(str));
+	//if (c == 'p')
+	//	flags = ft_print_all(flags, str, ft_strlen(str));
 	len = ft_strlen(str);
 	if (flags.hash && c == 'o' && flags.nbr2 <= len && str[0] != '0')
 		flags.nbr2 = len + 1;
-	if ( c != 'p')	
+	//if ( c != 'p')	
 		flags = print_di(flags, str, len, c);
 	free(str);
 	return (flags);
@@ -193,11 +184,12 @@ t_flags		ft_print_ushort(t_flags flags, char c, unsigned short int flag)
 	return (flags);
 }
 
-t_flags		ft_print_str(t_flags flags, char *str)
+t_flags		ft_print_str(t_flags flags, char *str, char c)
 {
 	if (!str)
 		str = "(null)";
-	flags = print_s(flags, str, ft_strlen(str));
+	flags = print_s(flags, str, ft_strlen(str), c);
+//	ft_putstr(str);
 	return (flags);
 }
 
@@ -230,18 +222,20 @@ t_flags		ft_print_schar_di(t_flags flags, signed char flag)
 	return (flags);
 }
 
-/*
+
 #include <stdio.h>
 #include <limits.h>
 int		main()
 {
-//	void *s = "ali zaynoune";
-ft_printf("%d\n", ft_printf("|%d|\n", INT_MIN));
-	  printf("%d\n", printf("|%d|\n", INT_MIN));
-
+	void *s = "%";// = "ali zaynoune";
+	float a = 9.9999991;
+ft_printf("%d\n", ft_printf("|%-9%|\n"));
+      printf("%d\n", printf("|%-9%|\n"));
+// printf("  %ld", (long)(a * 10000000000000000));
+//  printf("%d", s[0]);
 
 
 
 	return (0);
 }
-*/
+

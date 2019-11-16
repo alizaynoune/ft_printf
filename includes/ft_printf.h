@@ -6,7 +6,7 @@
 /*   By: alzaynou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/31 13:06:55 by alzaynou          #+#    #+#             */
-/*   Updated: 2019/11/15 20:29:05 by alzaynou         ###   ########.fr       */
+/*   Updated: 2019/11/16 20:35:27 by alzaynou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ t_flags ft_print_ushort(t_flags flags, char c, unsigned short int flag);
 char    *ft_convert_ushort_xX(char c, unsigned short int num);
 char    *ft_convert_ushort_o(unsigned short int num);
 char    *ft_convert_ushort_u(unsigned short int num);
-t_flags     ft_print_str(t_flags flags, char *str);
+t_flags     ft_print_str(t_flags flags, char *str, char c);
 t_flags     ft_print_uchar(t_flags flags, char c, unsigned char flag);
 t_flags     ft_print_schar_di(t_flags flags, signed char flag);
 char    *ft_convert_uchar_u(unsigned char num);
@@ -86,12 +86,11 @@ char    *ft_convert_uchar_xX(char c, unsigned char num);
 char    *ft_convert_uchar_o(unsigned char num);
 char    *ft_convert_schar_di(signed char num);
 t_flags     ft_read_prec(const char *format, t_flags flags);
-t_flags     ft_print_all(t_flags flags, char *str, int len);
 t_flags     ft_get_precision(t_flags flags, char *sflg, char c);
-t_flags     print_s(t_flags flags, char *str, int len);
+t_flags     print_s(t_flags flags, char *str, int len, char c);
 void		print_pace(t_flags flags, int len);
 t_flags     ft_reset_precision(t_flags flags);
-t_flags     ft_get_precision_s(t_flags flags, char *sflg);
+t_flags     ft_get_precision_s(t_flags flags, char *sflg, char c);
 t_flags     ft_get_prec_di(t_flags flags, char *sflg);
 t_flags     print_di(t_flags flags, char *str, int len, char c);
 t_flags         ft_skip_space(const char *format, t_flags flags);

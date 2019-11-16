@@ -6,7 +6,7 @@
 /*   By: alzaynou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/07 16:25:26 by alzaynou          #+#    #+#             */
-/*   Updated: 2019/11/15 18:54:44 by alzaynou         ###   ########.fr       */
+/*   Updated: 2019/11/16 20:14:33 by alzaynou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,21 +43,29 @@ t_flags     ft_read_prec(const char *format, t_flags flags)
 
 t_flags		ft_get_precision(t_flags flags, char *sflg, char c)
 {
-	if (c == 's')
-		flags = ft_get_precision_s(flags, sflg);
-	else if (ft_strchr(flags.flg1, c))
+	if (c == 's' || c == '%')
+		flags = ft_get_precision_s(flags, sflg, c);
+	else if (ft_strchr(flags.flg1, c) || c == 'p')
 		flags = ft_get_prec_di(flags, sflg);
 	else if (c == 'c')
 		flags = ft_get_prec_c(flags, sflg);
 	return (flags);
 }
 
-t_flags     ft_get_precision_s(t_flags flags, char *sflg)
+t_flags     ft_get_precision_s(t_flags flags, char *sflg, char c)
 {
 	int	cnt;
 
 	cnt = 0;
 	flags.nbr2 = -1;
+	if (!ft_strchr(sflg, '-') && c == '%')
+	{
+		while (!ft_isdigit(sflg[cnt]))
+			cnt++;
+		if (sflg[cnt] == '0')
+			flags.is0 = 1;
+		cnt = 0;
+	}
 	flags.nbr1 = ft_atoi(sflg);
 	while (sflg[cnt] && sflg[cnt] != '.')
 		cnt++;
