@@ -6,7 +6,7 @@
 /*   By: alzaynou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/31 13:09:51 by alzaynou          #+#    #+#             */
-/*   Updated: 2019/11/16 20:54:15 by alzaynou         ###   ########.fr       */
+/*   Updated: 2019/11/17 21:32:19 by ybolles          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,7 +142,7 @@ t_flags		ft_print_ulong(t_flags flags, char c, unsigned long int flag)
 	int		len;
 
 	if (c == 'x' || c == 'X')
-		str = ft_convert_ulong_xX(c, flag);
+		str = ft_convert_ulong_x(c, flag);
 	if (c == 'o')
 		str = ft_cnvert_ulong_o(flag);
 	if (c == 'u')
@@ -171,7 +171,7 @@ t_flags		ft_print_ushort(t_flags flags, char c, unsigned short int flag)
 	int		len;
 
 	if (c == 'x' || c == 'X')
-		str = ft_convert_ushort_xX(c, flag);
+		str = ft_convert_ushort_x(c, flag);
 	if (c == 'o')
 		str = ft_convert_ushort_o(flag);
 	if (c == 'u')
@@ -199,7 +199,7 @@ t_flags		ft_print_uchar(t_flags flags, char c, unsigned char flag)
 	int		len;
 
 	if (c == 'x' || c == 'X')
-		str = ft_convert_uchar_xX(c, flag);
+		str = ft_convert_uchar_x(c, flag);
 	if (c == 'o')
 		str = ft_convert_uchar_o(flag);
 	if (c == 'u')
@@ -222,15 +222,15 @@ t_flags		ft_print_schar_di(t_flags flags, signed char flag)
 	return (flags);
 }
 
-
+/*
 #include <stdio.h>
 #include <limits.h>
 int		main()
 {
 	void *s = "%";// = "ali zaynoune";
 	float a = 9.9999991;
-ft_printf("%d\n", ft_printf("|%-9%|\n"));
-      printf("%d\n", printf("|%-9%|\n"));
+ft_printf("%d\n", ft_printf("|%    -9.3i|\n", 12));
+      printf("%d\n", printf("|%    -9.3i|\n", 12));
 // printf("  %ld", (long)(a * 10000000000000000));
 //  printf("%d", s[0]);
 
@@ -238,4 +238,4 @@ ft_printf("%d\n", ft_printf("|%-9%|\n"));
 
 	return (0);
 }
-
+*/

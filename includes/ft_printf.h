@@ -6,7 +6,7 @@
 /*   By: alzaynou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/31 13:06:55 by alzaynou          #+#    #+#             */
-/*   Updated: 2019/11/16 20:35:27 by alzaynou         ###   ########.fr       */
+/*   Updated: 2019/11/17 22:00:29 by ybolles          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ typedef struct s_flags
 	int		is0;
 	int		isnb2;
 	int		hash;
+	char	*str;
 }				t_flags;
 
 # define SAFE(expr) if (!(expr)) exit (0)
@@ -68,21 +69,21 @@ t_flags ft_print_long_long_di(t_flags flags, long long int flag);
 char    *ft_long_long_di(long long int num);
 char    *ft_convert_long_di(long int num);
 t_flags ft_print_long_di(t_flags flags, long int flag);
-char    *ft_convert_ulong_xX(char c, unsigned long int num);
+char    *ft_convert_ulong_x(char c, unsigned long int num);
 t_flags ft_print_ulong(t_flags flags, char c, unsigned long int flag);
 char    *ft_cnvert_ulong_o(unsigned long int num);
 char    *ft_convert_ulong_u(unsigned long int num);
 t_flags ft_print_short_di(t_flags flags, short int flag);
 char    *ft_convert_short_di(short int num);
 t_flags ft_print_ushort(t_flags flags, char c, unsigned short int flag);
-char    *ft_convert_ushort_xX(char c, unsigned short int num);
+char    *ft_convert_ushort_x(char c, unsigned short int num);
 char    *ft_convert_ushort_o(unsigned short int num);
 char    *ft_convert_ushort_u(unsigned short int num);
 t_flags     ft_print_str(t_flags flags, char *str, char c);
 t_flags     ft_print_uchar(t_flags flags, char c, unsigned char flag);
 t_flags     ft_print_schar_di(t_flags flags, signed char flag);
 char    *ft_convert_uchar_u(unsigned char num);
-char    *ft_convert_uchar_xX(char c, unsigned char num);
+char    *ft_convert_uchar_x(char c, unsigned char num);
 char    *ft_convert_uchar_o(unsigned char num);
 char    *ft_convert_schar_di(signed char num);
 t_flags     ft_read_prec(const char *format, t_flags flags);
@@ -100,6 +101,6 @@ long long int   ft_atoi_llint(char *str);
 t_flags     ft_get_prec_c(t_flags flags, char *sflg);
 t_flags     print_c(t_flags flags, char c);
 char        *ft_get_hash(char *str);
-t_flags     ft_print_has_xX(t_flags flags, char c);
+t_flags     ft_print_has_x(t_flags flags, char c);
 
 #endif

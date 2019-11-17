@@ -6,16 +6,16 @@
 /*   By: alzaynou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/07 16:25:26 by alzaynou          #+#    #+#             */
-/*   Updated: 2019/11/16 20:14:33 by alzaynou         ###   ########.fr       */
+/*   Updated: 2019/11/17 17:49:20 by ybolles          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-t_flags     ft_read_prec(const char *format, t_flags flags)
+t_flags			ft_read_prec(const char *format, t_flags flags)
 {
-	int     cnt;
-	char    *sflg;
+	int		cnt;
+	char	*sflg;
 
 	cnt = CNT;
 	while (ft_strchr(flags.flgx, FORM1))
@@ -29,7 +29,7 @@ t_flags     ft_read_prec(const char *format, t_flags flags)
 		while (ft_strchr(flags.flgx, FORM1))
 			sflg[(CNT++) - cnt] = FORM1;
 		if (ft_strchr(flags.flg1, FORM1) || ft_strchr(flags.flg0, FORM1))
-		flags = ft_get_precision(flags, sflg, FORM1);
+			flags = ft_get_precision(flags, sflg, FORM1);
 		else if (ft_many_flags(format, flags) == 1)
 			flags = ft_get_precision(flags, sflg, FORM2);
 		else if (ft_many_flags(format, flags) == 2)
@@ -40,8 +40,7 @@ t_flags     ft_read_prec(const char *format, t_flags flags)
 	return (flags);
 }
 
-
-t_flags		ft_get_precision(t_flags flags, char *sflg, char c)
+t_flags			ft_get_precision(t_flags flags, char *sflg, char c)
 {
 	if (c == 's' || c == '%')
 		flags = ft_get_precision_s(flags, sflg, c);
@@ -52,7 +51,7 @@ t_flags		ft_get_precision(t_flags flags, char *sflg, char c)
 	return (flags);
 }
 
-t_flags     ft_get_precision_s(t_flags flags, char *sflg, char c)
+t_flags			ft_get_precision_s(t_flags flags, char *sflg, char c)
 {
 	int	cnt;
 
@@ -78,9 +77,9 @@ t_flags     ft_get_precision_s(t_flags flags, char *sflg, char c)
 	return (flags);
 }
 
-char		*ft_get_hash(char *str)
+char			*ft_get_hash(char *str)
 {
-	char 	*nstr;
+	char	*nstr;
 	int		cnt;
 	int		cnt1;
 
@@ -99,61 +98,7 @@ char		*ft_get_hash(char *str)
 	return (nstr);
 }
 
-t_flags		ft_get_prec_di(t_flags flags, char *sflg)
-{
-	int cnt;
-
-	cnt = 0;
-	if (ft_strchr(sflg, '#'))
-	{
-		sflg = ft_get_hash(sflg);
-		flags.hash = 1;
-	}
-	if (!ft_strchr(sflg, '.') && !ft_strchr(sflg, '-'))
-	{
-		while (sflg[cnt] && !ft_isdigit(sflg[cnt]))
-			cnt++;
-		flags.is0 = sflg[cnt] == '0' ? 1 : 0;
-		cnt = 0;
-	}
-	if (!ft_strchr(sflg, '.') && !ft_strchr(sflg, '-') && flags.is0)
-	{
-		while (sflg[cnt] && (!ft_isdigit(sflg[cnt]) || sflg[cnt] == '0'))
-			cnt++;
-		flags.nbr2 = ft_atoi(&sflg[cnt]);
-		flags.nbr1 = 0;
-	}
-	else
-	{
-		if (ft_strchr(sflg, '.') && sflg[0] != '.')
-		{
-			while (sflg[cnt] && ((!ft_isdigit(sflg[cnt]) && sflg[cnt] != '.') ||
-						sflg[cnt] == '-' || sflg[cnt] == '+' || sflg[cnt] == '0'))
-				cnt++;
-			flags.nbr1 = ft_atoi(&sflg[cnt]);
-			while (sflg[cnt] && sflg[cnt] != '.')
-				cnt++;
-			flags.nbr2 = ft_atoi(&sflg[cnt + 1]);
-		}
-		else if (ft_strchr(sflg, '.') && sflg[0] == '.')
-			flags.nbr2 = ft_atoi(&sflg[cnt + 1]);
-		else
-		{
-			while (sflg[cnt] && (sflg[cnt] == '-' || sflg[cnt] == '+' || sflg[cnt] == '0'))
-				cnt++;
-			flags.nbr1 = ft_atoi(&sflg[cnt]);
-			flags.isnb2 = 1;
-		}
-	}
-	flags.prec = ft_strchr(sflg, '+') ? 1 : 0;
-	flags.sgn = ft_strchr(sflg, '-') ? 1 : 0;
-	flags.is0 = flags.sgn ? 0 : flags.is0;
-	free(sflg);
-	flags.isprec = 1;
-	return (flags);
-}
-
-t_flags		ft_reset_precision(t_flags flags)
+t_flags			ft_reset_precision(t_flags flags)
 {
 	flags.nbr1 = 0;
 	flags.nbr2 = 0;

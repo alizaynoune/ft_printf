@@ -6,7 +6,7 @@
 /*   By: alzaynou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/04 14:59:34 by alzaynou          #+#    #+#             */
-/*   Updated: 2019/11/05 19:09:14 by alzaynou         ###   ########.fr       */
+/*   Updated: 2019/11/17 17:39:27 by ybolles          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char	*ft_convert_long_di(long int num)
 	int			cnt;
 
 	cnt = num <= 0 ? 1 : 0;
-	num1 = num < 0 ? num * - 1 : num;
+	num1 = num < 0 ? num * -1 : num;
 	while (num1 > 0)
 	{
 		num1 /= 10;
@@ -27,7 +27,7 @@ char	*ft_convert_long_di(long int num)
 	}
 	SAFE(str = (char *)malloc(sizeof(char) * (cnt + 1)));
 	str[cnt--] = '\0';
-	num1 = num < 0 ? num * - 1 : num;
+	num1 = num < 0 ? num * -1 : num;
 	while (cnt >= 0)
 	{
 		str[cnt--] = (num1 % 10) + '0';
@@ -38,7 +38,7 @@ char	*ft_convert_long_di(long int num)
 	return (str);
 }
 
-char	*ft_convert_ulong_xX(char c, unsigned long int num)
+char	*ft_convert_ulong_x(char c, unsigned long int num)
 {
 	unsigned long int	num1;
 	char				*str;
