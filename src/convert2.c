@@ -6,7 +6,7 @@
 /*   By: alzaynou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/04 14:59:34 by alzaynou          #+#    #+#             */
-/*   Updated: 2019/11/23 17:27:55 by ybolles          ###   ########.fr       */
+/*   Updated: 2019/11/23 23:12:31 by alzaynou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 char	*ft_convert_long_di(long int num)
 {
-	long int	num1;
-	char		*str;
-	int			cnt;
+	unsigned long int	num1;
+	char				*str;
+	int					cnt;
 
 	cnt = num <= 0 ? 1 : 0;
 	num1 = num < 0 ? num * -1 : num;
