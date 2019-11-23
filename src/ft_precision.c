@@ -6,60 +6,13 @@
 /*   By: alzaynou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/07 16:25:26 by alzaynou          #+#    #+#             */
-<<<<<<< HEAD
 /*   Updated: 2019/11/23 17:30:08 by ybolles          ###   ########.fr       */
-=======
-/*   Updated: 2019/11/17 17:49:20 by ybolles          ###   ########.fr       */
->>>>>>> cf035796e6e081e24719fc69361926f60606ff59
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../ft_printf.h"
 
-<<<<<<< HEAD
 t_flags		ft_get_precision_s(t_flags flags, char *sflg, char c)
-=======
-t_flags			ft_read_prec(const char *format, t_flags flags)
-{
-	int		cnt;
-	char	*sflg;
-
-	cnt = CNT;
-	while (ft_strchr(flags.flgx, FORM1))
-		CNT++;
-	if (ft_strchr(flags.flg1, FORM1) || ft_strchr(flags.flg0, FORM1) ||
-			ft_many_flags(format, flags))
-	{
-		SAFE(sflg = (char *)malloc(sizeof(char) * ((CNT - cnt) + 1)));
-		sflg[CNT - cnt] = '\0';
-		CNT = cnt;
-		while (ft_strchr(flags.flgx, FORM1))
-			sflg[(CNT++) - cnt] = FORM1;
-		if (ft_strchr(flags.flg1, FORM1) || ft_strchr(flags.flg0, FORM1))
-			flags = ft_get_precision(flags, sflg, FORM1);
-		else if (ft_many_flags(format, flags) == 1)
-			flags = ft_get_precision(flags, sflg, FORM2);
-		else if (ft_many_flags(format, flags) == 2)
-			flags = ft_get_precision(flags, sflg, FORM3);
-	}
-	else
-		CNT = cnt;
-	return (flags);
-}
-
-t_flags			ft_get_precision(t_flags flags, char *sflg, char c)
-{
-	if (c == 's' || c == '%')
-		flags = ft_get_precision_s(flags, sflg, c);
-	else if (ft_strchr(flags.flg1, c) || c == 'p')
-		flags = ft_get_prec_di(flags, sflg);
-	else if (c == 'c')
-		flags = ft_get_prec_c(flags, sflg);
-	return (flags);
-}
-
-t_flags			ft_get_precision_s(t_flags flags, char *sflg, char c)
->>>>>>> cf035796e6e081e24719fc69361926f60606ff59
 {
 	int	cnt;
 
@@ -86,11 +39,7 @@ t_flags			ft_get_precision_s(t_flags flags, char *sflg, char c)
 	return (flags);
 }
 
-<<<<<<< HEAD
 char		*ft_get_hash(int *hash, char *str)
-=======
-char			*ft_get_hash(char *str)
->>>>>>> cf035796e6e081e24719fc69361926f60606ff59
 {
 	char	*nstr;
 	int		cnt;
@@ -113,7 +62,6 @@ char			*ft_get_hash(char *str)
 	return (nstr);
 }
 
-<<<<<<< HEAD
 t_flags		ft_get_prec_di(t_flags flags, char *sflg, int cnt)
 {
 	if (ft_strchr(sflg, '#'))
@@ -168,9 +116,6 @@ t_flags		ft_get_prec_di2(t_flags flags, char *sflg, int cnt)
 }
 
 t_flags		ft_reset_precision(t_flags flags)
-=======
-t_flags			ft_reset_precision(t_flags flags)
->>>>>>> cf035796e6e081e24719fc69361926f60606ff59
 {
 	flags.nbr1 = 0;
 	flags.nbr2 = 0;

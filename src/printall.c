@@ -6,21 +6,13 @@
 /*   By: alzaynou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/08 14:36:31 by alzaynou          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2019/11/23 20:03:06 by alzaynou         ###   ########.fr       */
-=======
-/*   Updated: 2019/11/17 20:48:52 by ybolles          ###   ########.fr       */
->>>>>>> cf035796e6e081e24719fc69361926f60606ff59
+/*   Updated: 2019/11/23 17:30:32 by ybolles          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../ft_printf.h"
 
-<<<<<<< HEAD
 t_flags		print_di3(t_flags flags, char *str, char c)
-=======
-t_flags		ft_print_has_x(t_flags flags, char c)
->>>>>>> cf035796e6e081e24719fc69361926f60606ff59
 {
 	if (str[0] != '-')
 		RTN = print_space(flags, flags.spc, ' ');
@@ -30,7 +22,6 @@ t_flags		ft_print_has_x(t_flags flags, char c)
 	return (flags);
 }
 
-<<<<<<< HEAD
 t_flags		print_di2(t_flags flags, char *str, int len, int cnt)
 {
 	if (len)
@@ -43,27 +34,10 @@ t_flags		print_di2(t_flags flags, char *str, int len, int cnt)
 }
 
 t_flags		print_di1(t_flags flags, char *str, int cnt, char c)
-=======
-int			print_space(t_flags flags, int len, char c)
-{
-	int cnt;
-
-	cnt = 0;
-	while (cnt++ < len)
-	{
-		ft_putchar(c);
-		RTN++;
-	}
-	return (RTN);
-}
-
-t_flags		print_s(t_flags flags, char *str, int len, char c)
->>>>>>> cf035796e6e081e24719fc69361926f60606ff59
 {
 	int len;
 
-<<<<<<< HEAD
-	len = ft_strlen(str);
+	len = strlen(str);
 	flags.spc = flags.prec || str[0] == '-' ? 0 : flags.spc;
 	RTN = print_space(flags, flags.spc, ' ');
 	flags.prec = str[0] == '-' || (c != 'd' && c != 'i') ? 0 : flags.prec;
@@ -77,13 +51,6 @@ t_flags		print_s(t_flags flags, char *str, int len, char c)
 	if (!flags.sgn && flags.nbr2 >= len)
 		RTN = print_space(flags, flags.nbr1 - (flags.nbr2 + cnt), ' ');
 	else if (!flags.sgn && flags.nbr2 < len)
-=======
-	cnt = 0;
-	if (c != '%')
-		len = len >= flags.nbr2 && flags.isprec && flags.nbr2 >= 0
-			? flags.nbr2 : len;
-	if (flags.sgn == 1 && !flags.is0)
->>>>>>> cf035796e6e081e24719fc69361926f60606ff59
 		RTN = print_space(flags, flags.nbr1 - len, ' ');
 	len = str[0] == '-' && !flags.is0 ? len - 1 : len;
 	RTN = str[0] == '-' && !flags.is0 ? RTN + 1 : RTN;
@@ -95,7 +62,6 @@ t_flags		print_s(t_flags flags, char *str, int len, char c)
 	return (flags);
 }
 
-<<<<<<< HEAD
 t_flags		print_di(t_flags flags, char *str, int len, char c)
 {
 	int cnt;
@@ -125,8 +91,6 @@ t_flags		print_di(t_flags flags, char *str, int len, char c)
 	return (ft_reset_precision(flags));
 }
 
-=======
->>>>>>> cf035796e6e081e24719fc69361926f60606ff59
 t_flags		print_c(t_flags flags, char c)
 {
 	if (!flags.sgn)

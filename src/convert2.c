@@ -6,11 +6,7 @@
 /*   By: alzaynou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/04 14:59:34 by alzaynou          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2019/11/23 22:28:30 by alzaynou         ###   ########.fr       */
-=======
-/*   Updated: 2019/11/17 17:39:27 by ybolles          ###   ########.fr       */
->>>>>>> cf035796e6e081e24719fc69361926f60606ff59
+/*   Updated: 2019/11/23 17:27:55 by ybolles          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +14,9 @@
 
 char	*ft_convert_long_di(long int num)
 {
-	unsigned long int	num1;
-	char				*str;
-	int					cnt;
+	long int	num1;
+	char		*str;
+	int			cnt;
 
 	cnt = num <= 0 ? 1 : 0;
 	num1 = num < 0 ? num * -1 : num;
@@ -42,11 +38,7 @@ char	*ft_convert_long_di(long int num)
 	return (str);
 }
 
-<<<<<<< HEAD
 char	*ft_convert_ulong_xx(char c, unsigned long int num)
-=======
-char	*ft_convert_ulong_x(char c, unsigned long int num)
->>>>>>> cf035796e6e081e24719fc69361926f60606ff59
 {
 	unsigned long int	num1;
 	char				*str;

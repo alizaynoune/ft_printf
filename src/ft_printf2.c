@@ -6,7 +6,7 @@
 /*   By: ybolles <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/23 17:06:49 by ybolles           #+#    #+#             */
-/*   Updated: 2019/11/23 21:01:44 by alzaynou         ###   ########.fr       */
+/*   Updated: 2019/11/23 17:24:26 by ybolles          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ t_flags		ft_flags(void)
 	flags.spc = 0;
 	flags.is0 = 0;
 	flags.hash = 0;
-	RTN = 0;
 	return (flags);
 }
 
