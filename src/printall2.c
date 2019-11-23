@@ -5,6 +5,39 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ybolles <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
+<<<<<<< HEAD
+/*   Created: 2019/11/23 17:02:34 by ybolles           #+#    #+#             */
+/*   Updated: 2019/11/23 17:30:42 by ybolles          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../ft_printf.h"
+
+t_flags		ft_print_has_xx(t_flags flags, char c)
+{
+	if (c == 'x' || c == 'p')
+		ft_putstr("0x");
+	if (c == 'X')
+		ft_putstr("0X");
+	RTN += 2;
+	return (flags);
+}
+
+int			print_space(t_flags flags, int len, char c)
+{
+	int cnt;
+
+	cnt = 0;
+	while (cnt++ < len)
+	{
+		ft_putchar(c);
+		RTN++;
+	}
+	return (RTN);
+}
+
+t_flags		print_s(t_flags flags, char *str, int len, char c)
+=======
 /*   Created: 2019/11/17 20:47:14 by ybolles           #+#    #+#             */
 /*   Updated: 2019/11/17 23:10:51 by ybolles          ###   ########.fr       */
 /*                                                                            */
@@ -70,10 +103,24 @@ t_flags		print_di2(t_flags flags, int cnt, int len, char c)
 }
 
 t_flags		print_di(t_flags flags, char *str, int len, char c)
+>>>>>>> cf035796e6e081e24719fc69361926f60606ff59
 {
 	int cnt;
 
 	cnt = 0;
+<<<<<<< HEAD
+	if (c != '%')
+		len = len >= flags.nbr2 && flags.isprec && flags.nbr2 >= 0 ?
+			flags.nbr2 : len;
+	if (flags.sgn == 1 && !flags.is0)
+		RTN = print_space(flags, flags.nbr1 - len, ' ');
+	if (flags.sgn == 1 && flags.is0)
+		RTN = print_space(flags, flags.nbr1 - len, '0');
+	while (cnt < len)
+		ft_putchar(str[cnt++]);
+	if (flags.sgn == -1)
+		RTN = print_space(flags, flags.nbr1 - len, ' ');
+=======
 	flags.str = str;
 	if (flags.isprec)
 	{
@@ -87,6 +134,7 @@ t_flags		print_di(t_flags flags, char *str, int len, char c)
 			flags = ft_print_has_x(flags, c);
 		ft_putstr(str);
 	}
+>>>>>>> cf035796e6e081e24719fc69361926f60606ff59
 	RTN += len;
 	flags = ft_reset_precision(flags);
 	return (flags);

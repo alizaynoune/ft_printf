@@ -6,12 +6,15 @@
 /*   By: alzaynou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/04 17:06:01 by alzaynou          #+#    #+#             */
+<<<<<<< HEAD
+/*   Updated: 2019/11/23 17:28:49 by ybolles          ###   ########.fr       */
+=======
 /*   Updated: 2019/11/17 17:42:59 by ybolles          ###   ########.fr       */
+>>>>>>> cf035796e6e081e24719fc69361926f60606ff59
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/ft_printf.h"
-#include <stdio.h>
+#include "../ft_printf.h"
 
 char	*ft_convert_short_di(short int num)
 {
@@ -40,7 +43,11 @@ char	*ft_convert_short_di(short int num)
 	return (str);
 }
 
+<<<<<<< HEAD
+char	*ft_convert_ushort_xx(char c, unsigned short int num)
+=======
 char	*ft_convert_ushort_x(char c, unsigned short int num)
+>>>>>>> cf035796e6e081e24719fc69361926f60606ff59
 {
 	unsigned short int	num1;
 	char				*str;

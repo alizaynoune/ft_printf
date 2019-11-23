@@ -6,11 +6,15 @@
 /*   By: alzaynou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/02 23:42:41 by alzaynou          #+#    #+#             */
+<<<<<<< HEAD
+/*   Updated: 2019/11/23 17:27:45 by ybolles          ###   ########.fr       */
+=======
 /*   Updated: 2019/11/17 17:36:45 by ybolles          ###   ########.fr       */
+>>>>>>> cf035796e6e081e24719fc69361926f60606ff59
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/ft_printf.h"
+#include "../ft_printf.h"
 
 char	*ft_to_octal(unsigned int num)
 {
