@@ -6,7 +6,7 @@
 /*   By: alzaynou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/08 14:36:31 by alzaynou          #+#    #+#             */
-/*   Updated: 2019/11/23 17:30:32 by ybolles          ###   ########.fr       */
+/*   Updated: 2019/12/06 00:15:20 by alzaynou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ t_flags		print_di1(t_flags flags, char *str, int cnt, char c)
 {
 	int len;
 
-	len = strlen(str);
+	len = ft_strlen(str);
 	flags.spc = flags.prec || str[0] == '-' ? 0 : flags.spc;
 	RTN = print_space(flags, flags.spc, ' ');
 	flags.prec = str[0] == '-' || (c != 'd' && c != 'i') ? 0 : flags.prec;
