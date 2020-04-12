@@ -1,0 +1,6 @@
+# ft_printf
+recoding function printf
+flag recoding [diouxXscp] double flags [h diouxX] [l diouxX] triple flags [hh diouxX] [ll diouxX] precision and widt
+
+usage: like printf
+      ft_printf("%s\n", "test");
